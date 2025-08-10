@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "titulo": "Psicoterapia Individual",
+    "contenido": [
+      {
+        "icono": "/src/assets/images/Overlay/OVLUPA1.svg",
+        "titulo": "¿Qué es la psicoterapia individual?",
+        "texto": "Es un espacio terapéutico diseñado para ayudarte a sentirte mejor emocional, mental y psicológicamente. Trabajo con un enfoque humanista centrado en la persona: sin juicios, etiquetas ni restricciones. Cada sesión es personalizada y adaptada a ti."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVUSER1.svg",
+        "titulo": "¿Para quién es?",
+        "texto": "Para todas las edades: niños, jóvenes, adultos y adultos mayores. Juntos exploraremos tus fortalezas internas y aprenderás herramientas para superar dificultades, adaptadas a tus necesidades y ritmo."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVPLANTA1.svg",
+        "titulo": "¿Qué puedes esperar?",
+        "texto": [
+          "Un espacio seguro y confidencial.",
+          "Acompañamiento emocional sin juicios.",
+          "Estrategias para manejar ansiedad, estrés o depresión.",
+          "Desarrollo de habilidades de afrontamiento y resiliencia."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Capacitación Empresarial",
+    "contenido": [
+      {
+        "icono": "/src/assets/images/Overlay/OVLUPA2.svg",
+        "titulo": "¿Qué es la capacitación empresarial?",
+        "texto": "Talleres y programas diseñados para fortalecer habilidades blandas, comunicación, liderazgo y bienestar emocional en equipos de trabajo."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVUSER2.svg",
+        "titulo": "¿Para quién es?",
+        "texto": "Empresas, organizaciones y equipos que buscan mejorar su clima laboral, productividad y salud emocional."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVPLANTA2.svg",
+        "titulo": "¿Qué puedes esperar?",
+        "texto": [
+          "Talleres dinámicos y participativos.",
+          "Herramientas prácticas para el día a día laboral.",
+          "Mejora en la comunicación y el trabajo en equipo.",
+          "Ambiente laboral más saludable y productivo."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Escuela para Padres",
+    "contenido": [
+      {
+        "icono": "/src/assets/images/Overlay/OVLUPA3.svg",
+        "titulo": "¿Qué es la escuela para padres?",
+        "texto": "Espacios de orientación y formación para madres, padres y cuidadores, enfocados en fortalecer vínculos familiares y habilidades de crianza."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVUSER3.svg",
+        "titulo": "¿Para quién es?",
+        "texto": "Padres, madres y cuidadores de niños, niñas y adolescentes que desean mejorar la convivencia y el desarrollo familiar."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVPLANTA3.svg",
+        "titulo": "¿Qué puedes esperar?",
+        "texto": [
+          "Herramientas para la crianza positiva.",
+          "Estrategias para resolver conflictos familiares.",
+          "Apoyo en el desarrollo emocional de los hijos.",
+          "Espacios de escucha y acompañamiento."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "titulo": "Orientación Vocacional",
+    "contenido": [
+      {
+        "icono": "/src/assets/images/Overlay/OVLUPA4.svg",
+        "titulo": "¿Qué es la orientación vocacional?",
+        "texto": "Proceso de acompañamiento para descubrir intereses, talentos y metas profesionales, facilitando la toma de decisiones sobre el futuro académico y laboral."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVUSER4.svg",
+        "titulo": "¿Para quién es?",
+        "texto": "Adolescentes y jóvenes que están por elegir carrera, así como adultos en proceso de cambio o búsqueda profesional."
+      },
+      {
+        "icono": "/src/assets/images/Overlay/OVPLANTA4.svg",
+        "titulo": "¿Qué puedes esperar?",
+        "texto": [
+          "Evaluación de intereses y habilidades.",
+          "Claridad en la toma de decisiones.",
+          "Planificación de metas profesionales.",
+          "Acompañamiento personalizado."
+        ]
+      }
+    ]
+  }
+]

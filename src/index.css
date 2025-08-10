@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}
+
+.btn-primary {
+  background-color: #A569E5;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #8B4DD1;
+}
+
+.btn-secondary {
+  background-color: #FFC446;
+  color: #11051D;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #E6B03F;
+}
+
+.btn-accent {
+  background-color: #05C5C8;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.btn-accent:hover {
+  background-color: #04A5A8;
+}
+
+.card {
+  background-color: #F9F4FE;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
+  border: 1px solid #F0E5FD;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #E1CBFB;
+  border-radius: 0.5rem;
+  background-color: #F9F4FE;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px #A569E5;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #A569E5, #D88ADE);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Instagram feed styles */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Instagram iframe scrollbar styles */
+.instagram-iframe {
+  scrollbar-width: thin;
+  scrollbar-color: #A569E5 #F0E5FD;
+}
+
+.instagram-iframe::-webkit-scrollbar {
+  width: 8px;
+}
+
+.instagram-iframe::-webkit-scrollbar-track {
+  background: #F0E5FD;
+  border-radius: 4px;
+}
+
+.instagram-iframe::-webkit-scrollbar-thumb {
+  background: #A569E5;
+  border-radius: 4px;
+}
+
+.instagram-iframe::-webkit-scrollbar-thumb:hover {
+  background: #8B4DD1;
+}

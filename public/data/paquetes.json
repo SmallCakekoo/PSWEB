@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "titulo": "Sesión Personalizada",
+    "subtitulo": "Adaptada a tus necesidades",
+    "duracion": "45 - 50 minutos",
+    "modalidad": "Presencial/Virtual",
+    "precio": "$60.000 COP",
+    "imagen": "/src/assets/images/PaquetePersonalizada.svg",
+    "descripcion": [
+      "Una **sesión única** diseñada especialmente para ti, donde exploraremos juntos el motivo de tu consulta, recopilaremos información clave y construiremos una visión general de tu situación para diseñar un **plan terapéutico a tu medida**.",
+      "Las sesiones individuales, que se realizan **semanalmente** o **cada 15 días**, se adaptan por completo a tus necesidades y son fundamentales para avanzar en tu proceso personal."
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Paquete Mensual",
+    "subtitulo": "Seguimiento continuo",
+    "duracion": "4 ss. de 45 - 50 minutos",
+    "modalidad": "Presencial/Virtual",
+    "precio": "$220.000 COP",
+    "imagen": "/src/assets/images/PaqueteMensual.svg",
+    "descripcion": [
+      "El **acompañamiento ideal** para establecer una rutina terapéutica que impulse tu crecimiento personal de manera constante y progresiva.",
+      "El paquete mensual, adaptado a tus necesidades, incluye **4 sesiones de 45-50 minutos**, una por semana. Es una opción ideal para iniciar tu proceso con acompañamiento constante"
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Paquete Trimestral",
+    "subtitulo": "Trabajo profundo",
+    "duracion": "10ss. de 45 - 50 minutos",
+    "modalidad": "Presencial/Virtual",
+    "precio": "$550.000 COP",
+    "imagen": "/src/assets/images/PaqueteTrimestral.svg",
+    "descripcion": [
+      "La **experiencia más completa** para un trabajo terapéutico profundo y transformador que te llevará a descubrir tu mejor versión.",
+      "El paquete trimestral, adaptado a tus necesidades, incluye **10 sesiones de 45-50 minutos** distribuidas a lo largo de **3 meses**, con un **10% de descuento**.",
+      "Las sesiones en paquete trimestral, son adaptadas a tus necesidades y las que muestran **más resultados**, debido al proceso continuo que se lleva."
+    ]
+  }
+]
