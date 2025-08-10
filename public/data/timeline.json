@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "date": "2024",
     "title": "Psicóloga – IPS Home and Health",
     "description": [
@@ -9,6 +10,7 @@
     "image": "/src/assets/images/TimelineIndependiente.svg"
   },
   {
+    "id": 2,
     "date": "2023",
     "title": "Psicóloga Independiente & Fundación Vida Luz del Sol",
     "description": [
@@ -22,6 +24,7 @@
     "image": "/src/assets/images/TimelinePadres.svg"
   },
   {
+    "id": 3,
     "date": "2022",
     "title": "Graduación & Práctica Educativa",
     "description": [
@@ -37,6 +40,7 @@
     "image": "/src/assets/images/TimelineClases.svg"
   },
   {
+    "id": 4,
     "date": "2021",
     "title": "Practicante de Psicología Clínica – GESENCRO IPS",
     "description": [
@@ -47,6 +51,7 @@
     "image": "/src/assets/images/TimelineAnciano.svg"
   },
   {
+    "id": 5,
     "date": "2020",
     "title": "Formación Continua",
     "description": [
@@ -56,6 +61,7 @@
     "image": "/src/assets/images/ServicioIndividual.svg"
   },
   {
+    "id": 6,
     "date": "2019",
     "title": "Diplomado: Prevención e intervención del acoso escolar",
     "description": [
@@ -65,6 +71,7 @@
     "image": "/src/assets/images/TimelineAlumno.svg"
   },
   {
+    "id": 7,
     "date": "2018",
     "title": "Atención al Cliente – Roka Comunicación Visual",
     "description": [
@@ -75,6 +82,7 @@
     "image": "/src/assets/images/ServicioEmpresarial.svg"
   },
   {
+    "id": 8,
     "date": "2017",
     "title": "Bachiller Académica & Simposio Internacional",
     "description": [
