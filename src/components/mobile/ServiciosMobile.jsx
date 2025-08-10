@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const OverlayServicioMobile = ({ open, onClose, data }) => {
   if (!open || !data) return null;
+  
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -12,6 +20,9 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
         WebkitBackdropFilter: 'blur(8px)',
       }}
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="overlay-title"
     >
       <div
         className="relative w-full max-w-sm animate-fadein bg-white rounded-2xl shadow-xl"
@@ -22,11 +33,11 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
         }}
         onClick={e => e.stopPropagation()}
       >
-        {/* Header con fondo morado */}
         <div className="bg-[#55408B] rounded-t-2xl px-4 py-3 flex items-center justify-between">
-          <h2 className="text-lg font-medium text-white truncate">{data.titulo}</h2>
+          <h2 id="overlay-title" className="text-lg font-medium text-white truncate">{data.titulo}</h2>
           <button
             onClick={onClose}
+            onKeyDown={handleKeyDown}
             className="text-white hover:text-gray-200 hover:scale-110 transition-all duration-200 text-2xl font-light w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/10"
             aria-label="Cerrar"
           >
@@ -34,20 +45,19 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
           </button>
         </div>
         
-        {/* Contenido scrolleable */}
         <div className="overflow-y-auto" style={{ maxHeight: 'calc(90vh - 60px)' }}>
           <div className="space-y-6 px-4 py-4">
-            {data.contenido.map((item, idx) => (
-              <div key={idx} className="flex items-start gap-4">
+            {data.contenido.map((item) => (
+              <div key={item.id || item.titulo} className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-white/70 border border-[#e5d6fa] rounded-full flex items-center justify-center shadow-md">
-                  <img src={item.icono} alt="icono" className="w-6 h-6 object-contain" />
+                  <img src={item.icono} alt={`Icono de ${item.titulo}`} className="w-6 h-6 object-contain" />
                 </div>
                 <div className="flex-1 flex flex-col justify-start">
                   <h3 className="font-bold text-lg text-[#55408B] mb-2 text-left" style={{letterSpacing: '-0.5px'}}>{item.titulo}</h3>
                   {Array.isArray(item.texto) ? (
                     <div className="text-gray-700 text-sm leading-relaxed text-left">
-                      {item.texto.map((t, i) => (
-                        <div key={i} className="mb-1">
+                      {item.texto.map((t) => (
+                        <div key={t} className="mb-1">
                           <span className="text-[#A569E5] font-bold">·</span> {t}
                         </div>
                       ))}
@@ -62,7 +72,6 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
         </div>
       </div>
       
-      {/* Animación fade-in */}
       <style>{`
         @keyframes fadein {
           0% { opacity: 0; transform: scale(0.95); }
@@ -74,6 +83,24 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
       `}</style>
     </div>
   );
+};
+
+// Definición de PropTypes para OverlayServicioMobile
+OverlayServicioMobile.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    titulo: PropTypes.string.isRequired,
+    contenido: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      titulo: PropTypes.string.isRequired,
+      icono: PropTypes.string.isRequired,
+      texto: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]).isRequired
+    })).isRequired
+  })
 };
 
 const ServiciosMobile = () => {
@@ -155,4 +182,4 @@ const ServiciosMobile = () => {
   );
 };
 
-export default ServiciosMobile; 
+export default ServiciosMobile;
