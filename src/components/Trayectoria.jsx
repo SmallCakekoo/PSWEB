@@ -2,6 +2,72 @@ import { useState, useEffect } from "react";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+const renderTimelineSection = (section, sectionIndex, totalSections) => {
+  return (
+    <div key={sectionIndex} className="mb-4">
+      {section.map((line, lineIndex) => renderTimelineLine(line, lineIndex))}
+      {sectionIndex < totalSections - 1 && (
+        <div className="w-full h-px bg-gray-200 my-4"></div>
+      )}
+    </div>
+  );
+};
+
+const renderTimelineLine = (line, lineIndex) => {
+  // Caso 1: Primera línea con fecha
+  if (lineIndex === 0 && line.includes('|')) {
+    const [title, date] = line.split('|').map(s => s.trim());
+    return (
+      <div key={lineIndex} className="mb-2">
+        <h4 className="font-semibold text-lg" style={{ color: '#55408B' }}>
+          {title}
+        </h4>
+        <p className="text-sm italic" style={{ color: '#A569E5' }}>
+          {date}
+        </p>
+      </div>
+    );
+  }
+
+  // Caso 2: Título sin fecha
+  if (lineIndex === 0 && !line.includes('|') && line.length < 100) {
+    return (
+      <h4 key={lineIndex} className="font-semibold text-lg mb-2" style={{ color: '#55408B' }}>
+        {line}
+      </h4>
+    );
+  }
+
+  // Caso 3: Línea normal de contenido
+  return (
+    <p key={lineIndex} className="text-base mb-2 leading-relaxed" style={{ color: '#11051D' }}>
+      {line}
+    </p>
+  );
+};
+
+const parseSections = (content) => {
+  const sections = [];
+  let currentSection = [];
+  
+  content.forEach((line) => {
+    if (line.trim() === '') {
+      if (currentSection.length > 0) {
+        sections.push(currentSection);
+        currentSection = [];
+      }
+    } else {
+      currentSection.push(line);
+    }
+  });
+  
+  if (currentSection.length > 0) {
+    sections.push(currentSection);
+  }
+
+  return sections;
+};
+
 const Trayectoria = () => {
   const [timelineData, setTimelineData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -19,65 +85,11 @@ const Trayectoria = () => {
     setActiveIndex((prev) => (prev === timelineData.length - 1 ? 0 : prev + 1));
   };
 
-  // Función para renderizar el contenido de manera estructurada
   const renderContent = (content) => {
-    const sections = [];
-    let currentSection = [];
-    
-    content.forEach((line) => {
-      if (line.trim() === '') {
-        if (currentSection.length > 0) {
-          sections.push(currentSection);
-          currentSection = [];
-        }
-      } else {
-        currentSection.push(line);
-      }
-    });
-    
-    if (currentSection.length > 0) {
-      sections.push(currentSection);
-    }
-
-    return sections.map((section, sectionIndex) => (
-      <div key={sectionIndex} className="mb-4">
-        {section.map((line, lineIndex) => {
-          // Si es la primera línea y contiene "|", es un título con fecha
-          if (lineIndex === 0 && line.includes('|')) {
-            const [title, date] = line.split('|').map(s => s.trim());
-            return (
-              <div key={lineIndex} className="mb-2">
-                <h4 className="font-semibold text-lg" style={{ color: '#55408B' }}>
-                  {title}
-                </h4>
-                <p className="text-sm italic" style={{ color: '#A569E5' }}>
-                  {date}
-                </p>
-              </div>
-            );
-          }
-          // Si es una línea que parece ser un título (sin "|" pero en posición 0)
-          else if (lineIndex === 0 && !line.includes('|') && line.length < 100) {
-            return (
-              <h4 key={lineIndex} className="font-semibold text-lg mb-2" style={{ color: '#55408B' }}>
-                {line}
-              </h4>
-            );
-          }
-          // Para el resto de líneas
-          else {
-            return (
-              <p key={lineIndex} className="text-base mb-2 leading-relaxed" style={{ color: '#11051D' }}>
-                {line}
-              </p>
-            );
-          }
-        })}
-        {sectionIndex < sections.length - 1 && (
-          <div className="w-full h-px bg-gray-200 my-4"></div>
-        )}
-      </div>
-    ));
+    const sections = parseSections(content);
+    return sections.map((section, sectionIndex) => 
+      renderTimelineSection(section, sectionIndex, sections.length)
+    );
   };
 
   if (timelineData.length === 0) return null;
