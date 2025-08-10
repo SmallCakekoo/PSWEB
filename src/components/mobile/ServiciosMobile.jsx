@@ -25,6 +25,9 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
       <div 
         className="mx-auto flex items-center justify-center h-full"
         onClick={onClose}
+        onKeyDown={handleKeyDown}
+        role="button"
+        tabIndex={0}
       >
         <button
           className="relative w-full max-w-sm animate-fadein bg-white rounded-2xl shadow-xl"
