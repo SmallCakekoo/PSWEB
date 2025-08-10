@@ -158,9 +158,11 @@ const Servicios = () => {
         {/* Servicios Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {servicios.map((servicio) => (
-            <div
+            <button
               key={servicio.id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+              onClick={() => setOpenId(servicio.id)}
+              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group text-left"
+              aria-label={`Ver más detalles sobre ${servicio.titulo}`}
             >
               <div className="p-6 pb-4">
                 <div className="w-full h-32 flex items-center justify-center mb-4">
@@ -179,19 +181,15 @@ const Servicios = () => {
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">
                   {servicio.descripcion}
                 </p>
-                <button
+                <div
                   className="w-full flex items-center justify-center gap-2 group-hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-3 px-4"
                   style={{ backgroundColor: '#A569E5', color: '#fff' }}
-                  onClick={() => setOpenId(servicio.id)}
-                  onKeyDown={(e) => e.key === 'Enter' && setOpenId(servicio.id)}
-                  aria-label={`Leer más sobre ${servicio.titulo}`}
-                  tabIndex={0}
                 >
                   <span>Leer más</span>
                   <ArrowForwardIcon className="w-4 h-4" />
-                </button>
+                </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
