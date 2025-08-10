@@ -30,21 +30,27 @@ const NavbarMobile = () => {
   }, [menuOpen]);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 transition-all duration-300 z-[9999] ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-        : 'bg-transparent'
-    }`}>
+    <nav 
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 z-[9999] ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
+          : 'bg-transparent'
+      }`}
+      role="navigation"
+      aria-label="Menú principal"
+    >
       <div className="relative flex items-center justify-between px-4 md:px-8 py-4 md:py-6 w-full">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <img 
-            src={Logo} 
-            alt="Logo Sara Plaza" 
-            className="h-12 md:h-16" 
-            width="64"
-            height="64"
-          />
+          <a href="#inicio" aria-label="Ir al inicio">
+            <img 
+              src={Logo} 
+              alt="Logo Sara Plaza" 
+              className="h-12 md:h-16" 
+              width="64"
+              height="64"
+            />
+          </a>
         </div>
 
         {/* Botón hamburguesa solo en móvil */}
@@ -53,6 +59,8 @@ const NavbarMobile = () => {
             className="btn btn-ghost btn-circle z-50 relative"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +68,7 @@ const NavbarMobile = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke={isScrolled ? "#A569E5" : "#55408B"}
+              aria-hidden="true"
             >
               {menuOpen ? (
                 <path
@@ -82,6 +91,7 @@ const NavbarMobile = () => {
 
         {/* Enlaces de navegación */}
         <ul
+          id="mobile-menu"
           className={`
             fixed md:static top-16 right-4 left-auto md:left-auto md:right-auto md:w-auto
             max-w-xs md:max-w-none
@@ -95,6 +105,8 @@ const NavbarMobile = () => {
             z-40 md:z-auto
             ${isScrolled ? 'text-[#2D1A47]' : 'text-[#55408B]'}
           `}
+          role="menubar"
+          aria-hidden={!menuOpen}
         >
           {[
             { href: "#inicio", label: "Inicio" },
@@ -104,11 +116,15 @@ const NavbarMobile = () => {
             { href: "#paquetes-mobile", label: "Paquetes" },
             { href: "#contacto-mobile", label: "Contacto" }
           ].map(({ href, label }) => (
-            <li key={href}>
+            <li key={href} role="none">
               <a
                 href={href}
-                className={`hover:text-[#A569E5] transition-colors py-1 md:py-0 w-full ${isScrolled ? 'text-[#2D1A47]' : 'text-[#55408B]'}`}
+                className={`hover:text-[#A569E5] transition-colors py-1 md:py-0 w-full ${
+                  isScrolled ? 'text-[#2D1A47]' : 'text-[#55408B]'
+                }`}
                 onClick={() => setMenuOpen(false)}
+                role="menuitem"
+                tabIndex={menuOpen ? 0 : -1}
               >
                 {label}
               </a>
@@ -121,6 +137,7 @@ const NavbarMobile = () => {
           <div
             className="fixed inset-0 backdrop-blur-sm bg-white/20 z-20 md:hidden"
             onClick={() => setMenuOpen(false)}
+            role="presentation"
           />
         )}
       </div>

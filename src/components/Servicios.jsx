@@ -3,8 +3,18 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const OverlayServicio = ({ open, onClose, data }) => {
   if (!open || !data) return null;
+  
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
       className="fixed inset-0 z-40 flex items-center justify-center"
       style={{
         background: 'rgba(255, 255, 255, 0.45)',
@@ -13,6 +23,7 @@ const OverlayServicio = ({ open, onClose, data }) => {
         transition: 'background 0.3s',
       }}
       onClick={onClose}
+      onKeyDown={handleKeyDown}
     >
       <div
         className="relative max-w-2xl w-full animate-fadein"
@@ -28,7 +39,7 @@ const OverlayServicio = ({ open, onClose, data }) => {
       >
         {/* Header con fondo morado */}
         <div className="bg-[#55408B] rounded-t-[2rem] px-6 py-4 flex items-center justify-between">
-          <h2 className="text-2xl font-medium text-white">{data.titulo}</h2>
+          <h2 id="modal-title" className="text-2xl font-medium text-white">{data.titulo}</h2>
           <button
             onClick={onClose}
             className="text-white hover:text-gray-200 hover:scale-110 transition-all duration-200 text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10"
@@ -39,18 +50,21 @@ const OverlayServicio = ({ open, onClose, data }) => {
         </div>
         {/* Contenido */}
         <div className="space-y-10 px-6 pt-6">
-          {data.contenido.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-6">
+          {data.contenido?.map((item) => (
+            <div 
+              key={`${data.titulo}-${item.titulo}`} 
+              className="flex items-center gap-6"
+            >
               <div className="flex-shrink-0 w-16 h-16 bg-white/70 border border-[#e5d6fa] rounded-full flex items-center justify-center shadow-md">
-                <img src={item.icono} alt="icono" className="w-9 h-9 object-contain" />
+                <img src={item.icono} alt={`Icono de ${item.titulo}`} className="w-9 h-9 object-contain" />
               </div>
               <div className="flex-1 flex flex-col justify-center">
                 <h3 className="font-bold text-xl text-[#55408B] mb-2 text-left" style={{letterSpacing: '-0.5px'}}>{item.titulo}</h3>
                 {Array.isArray(item.texto) ? (
                   <p className="text-gray-700 text-base leading-relaxed text-left">
-                    {item.texto.map((t, i) => (
-                      <span key={i}>
-                        {i > 0 && <br />}<span className="text-[#A569E5] font-bold">·</span> {t}
+                    {item.texto.map((t) => (
+                      <span key={`${item.titulo}-${t.substring(0, 20)}`}>
+                        <span className="text-[#A569E5] font-bold">·</span> {t}<br />
                       </span>
                     ))}
                   </p>
@@ -86,12 +100,22 @@ const Servicios = () => {
   const [openId, setOpenId] = useState(null);
 
   useEffect(() => {
-    fetch('/data/servicios.json')
-      .then((res) => res.json())
-      .then((data) => setServicios(data));
-    fetch('/data/serviciosOverlay.json')
-      .then((res) => res.json())
-      .then((data) => setOverlays(data));
+    const fetchData = async () => {
+      try {
+        const [serviciosRes, overlaysRes] = await Promise.all([
+          fetch('/data/servicios.json'),
+          fetch('/data/serviciosOverlay.json')
+        ]);
+        const serviciosData = await serviciosRes.json();
+        const overlaysData = await overlaysRes.json();
+        setServicios(serviciosData);
+        setOverlays(overlaysData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const overlayData = overlays.find(o => o.id === openId);
@@ -102,7 +126,11 @@ const Servicios = () => {
       className="py-16 px-4 flex items-center justify-center pt-32"
       style={{ backgroundColor: '#F9F4FE', width: '100vw', height: '100vh' }}
     >
-      <OverlayServicio open={!!openId} onClose={() => setOpenId(null)} data={overlayData} />
+      <OverlayServicio 
+        open={!!openId} 
+        onClose={() => setOpenId(null)} 
+        data={overlayData} 
+      />
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-12">
@@ -121,7 +149,6 @@ const Servicios = () => {
               key={servicio.id}
               className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
             >
-              {/* Imagen del servicio */}
               <div className="p-6 pb-4">
                 <div className="w-full h-32 flex items-center justify-center mb-4">
                   <img
@@ -132,7 +159,6 @@ const Servicios = () => {
                 </div>
               </div>
 
-              {/* Contenido */}
               <div className="px-6 pb-6">
                 <h3 className="text-xl font-bold mb-3" style={{ color: '#55408B' }}>
                   {servicio.titulo}
@@ -140,12 +166,13 @@ const Servicios = () => {
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">
                   {servicio.descripcion}
                 </p>
-                {/* Botón */}
                 <button
-                  className="w-full flex items-center justify-center gap-2 group-hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-3 px-4 cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 group-hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-3 px-4"
                   style={{ backgroundColor: '#A569E5', color: '#fff' }}
                   onClick={() => setOpenId(servicio.id)}
+                  onKeyDown={(e) => e.key === 'Enter' && setOpenId(servicio.id)}
                   aria-label={`Leer más sobre ${servicio.titulo}`}
+                  tabIndex={0}
                 >
                   <span>Leer más</span>
                   <ArrowForwardIcon className="w-4 h-4" />

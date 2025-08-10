@@ -114,7 +114,7 @@ const Trayectoria = () => {
         <div className="flex-1 flex flex-col items-center">
           <div className="w-full flex items-center justify-between px-8 relative z-5">
             {timelineData.map((item, idx) => (
-              <div key={idx} className="flex flex-col items-center flex-1 relative group">
+              <div key={`${item.date}-${item.title.substring(0, 20)}`} className="flex flex-col items-center flex-1 relative group">
                 <div className={`w-6 h-6 rounded-full transition-all duration-300 transform group-hover:scale-110 ${
                   idx === activeIndex 
                     ? 'shadow-lg ring-4' 

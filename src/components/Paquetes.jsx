@@ -209,10 +209,22 @@ const Paquetes = () => {
                               scrollbarWidth: 'thin',
                               scrollbarColor: '#A569E5 #f3eafd'
                             }}>
-                              {paquete.descripcion.map((parrafo, idx) => (
-                                <p key={idx} className="text-gray-700 text-sm leading-relaxed text-left">
-                                  {parrafo.split('**').map((part, i) => 
-                                    i % 2 === 1 ? <strong key={i} style={{ color: '#55408B' }}>{part}</strong> : part
+                              {paquete.descripcion.map((parrafo) => (
+                                <p 
+                                  // Usar una combinación única del ID del paquete y el contenido del párrafo
+                                  key={`${paquete.id}-${parrafo.substring(0, 20)}`} 
+                                  className="text-gray-700 text-sm leading-relaxed text-left"
+                                >
+                                  {parrafo.split('**').map((part, i, array) => 
+                                    i % 2 === 1 
+                                      ? <strong 
+                                          // Usar una combinación única del ID del paquete, contenido y posición
+                                          key={`${paquete.id}-${part}-${i}`} 
+                                          style={{ color: '#55408B' }}
+                                        >
+                                        {part}
+                                      </strong> 
+                                    : part
                                   )}
                                 </p>
                               ))}

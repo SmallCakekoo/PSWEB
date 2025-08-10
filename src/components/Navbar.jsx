@@ -96,8 +96,16 @@ const Navbar = () => {
         {/* Fondo oscuro al abrir menú en móvil */}
         {menuOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-10 z-10 md:hidden"
+            role="button"
+            tabIndex={0}
+            aria-label="Cerrar menú"
+            className="fixed inset-0 bg-black bg-opacity-10 z-10 md:hidden cursor-pointer"
             onClick={() => setMenuOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setMenuOpen(false);
+              }
+            }}
           ></div>
         )}
       </div>
@@ -105,4 +113,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
