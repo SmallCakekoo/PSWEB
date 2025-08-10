@@ -71,17 +71,38 @@ const parseSections = (content) => {
 const Trayectoria = () => {
   const [timelineData, setTimelineData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
+    setError(null);
+    
     fetch('/data/timeline.json')
-      .then(res => res.json())
-      .then(data => setTimelineData(data));
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Error al cargar los datos');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setTimelineData(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error('Error cargando timeline:', err);
+        setError(err.message);
+        setIsLoading(false);
+      });
   }, []);
 
   const handlePrev = () => {
+    if (timelineData.length === 0) return;
     setActiveIndex((prev) => (prev === 0 ? timelineData.length - 1 : prev - 1));
   };
+  
   const handleNext = () => {
+    if (timelineData.length === 0) return;
     setActiveIndex((prev) => (prev === timelineData.length - 1 ? 0 : prev + 1));
   };
 
@@ -92,7 +113,35 @@ const Trayectoria = () => {
     );
   };
 
-  if (timelineData.length === 0) return null;
+  if (isLoading) {
+    return (
+      <section id="trayectoria" className="w-screen h-screen flex flex-col items-center justify-center py-12 px-4 md:px-12 bg-primary-light pt-32">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#55408B] mx-auto mb-4"></div>
+          <p className="text-[#55408B]">Cargando trayectoria...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || timelineData.length === 0) {
+    return (
+      <section id="trayectoria" className="w-screen h-screen flex flex-col items-center justify-center py-12 px-4 md:px-12 bg-primary-light pt-32">
+        <div className="text-center">
+          <h2 className="text-4xl font-bold mb-4 text-center" style={{ color: '#55408B' }}>Mi Trayectoria</h2>
+          <p className="text-[#55408B] mb-4">
+            {error || 'No se pudieron cargar los datos de la trayectoria.'}
+          </p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-6 py-3 bg-[#A569E5] text-white rounded-lg hover:bg-[#55408B] transition-colors cursor-pointer"
+          >
+            Reintentar
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="trayectoria" className="w-screen h-screen flex flex-col items-center justify-center py-12 px-4 md:px-12 bg-primary-light pt-32">
@@ -105,8 +154,9 @@ const Trayectoria = () => {
       <div className="relative w-full max-w-6xl flex items-center justify-center mb-12 h-24">
         <button 
           onClick={handlePrev} 
-          className="btn btn-circle btn-ghost absolute left-0 z-0 hover:bg-[#A569E5]/10 transition-all duration-300 cursor-pointer"
+          className="absolute left-0 z-5 w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#A569E5]/20 transition-all duration-300 cursor-pointer active:scale-95"
           aria-label="Anterior período de trayectoria"
+          disabled={timelineData.length === 0}
         >
           <ArrowBackIosNewIcon style={{ color: '#55408B' }} />
         </button>
@@ -148,8 +198,9 @@ const Trayectoria = () => {
         
         <button 
           onClick={handleNext} 
-          className="btn btn-circle btn-ghost absolute right-0 z-0 hover:bg-[#A569E5]/10 transition-all duration-300 cursor-pointer"
+          className="absolute right-0 z-5 w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#A569E5]/20 transition-all duration-300 cursor-pointer active:scale-95"
           aria-label="Siguiente período de trayectoria"
+          disabled={timelineData.length === 0}
         >
           <ArrowForwardIosIcon style={{ color: '#55408B' }} />
         </button>

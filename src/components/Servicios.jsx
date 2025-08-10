@@ -39,7 +39,7 @@ const OverlayServicio = ({ open, onClose, data }) => {
         aria-label="Cerrar modal"
       />
       <div
-        className="relative max-w-2xl w-full m-auto mt-20 animate-fadein"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-2xl w-full animate-fadein"
         style={{
           borderRadius: '2rem',
           background: '#fff',
