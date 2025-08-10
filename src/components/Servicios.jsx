@@ -19,12 +19,6 @@ const OverlayServicio = ({ open, onClose, data }) => {
 
   if (!open || !data) return null;
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
     <div
       role="dialog"
@@ -37,14 +31,13 @@ const OverlayServicio = ({ open, onClose, data }) => {
         WebkitBackdropFilter: 'blur(8px)',
         transition: 'background 0.3s',
       }}
-      onClick={handleBackdropClick}
-      onKeyDown={(e) => {
-        if (e.key === 'Escape') {
-          onClose();
-        }
-      }}
       tabIndex={-1}
     >
+      <button
+        className="fixed inset-0 w-full h-full cursor-default"
+        onClick={onClose}
+        aria-label="Cerrar modal"
+      />
       <div
         className="relative max-w-2xl w-full m-auto mt-20 animate-fadein"
         style={{
