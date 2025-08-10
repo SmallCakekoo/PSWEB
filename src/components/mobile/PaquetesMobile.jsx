@@ -16,20 +16,6 @@ const PaquetesMobile = () => {
       .then((data) => setPaquetes(data));
   }, []);
 
-  const nextSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide((prev) => (prev + 1) % paquetes.length);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
-
-  const prevSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide((prev) => (prev - 1 + paquetes.length) % paquetes.length);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
-
   const goToSlide = (index) => {
     if (isAnimating) return;
     setIsAnimating(true);
@@ -66,7 +52,6 @@ const PaquetesMobile = () => {
 
         {/* Carrusel Container */}
         <div className="relative">
-
           {/* Contenedor de Tarjeta Principal */}
           <div className="flex justify-center">
             <div className="w-full">
@@ -158,10 +143,20 @@ const PaquetesMobile = () => {
                               scrollbarWidth: 'thin',
                               scrollbarColor: '#A569E5 #f3eafd'
                             }}>
-                              {paquete.descripcion.map((parrafo, idx) => (
-                                <p key={idx} className="text-gray-700 text-base leading-relaxed text-left">
-                                  {parrafo.split('**').map((part, i) => 
-                                    i % 2 === 1 ? <strong key={i} style={{ color: '#55408B' }}>{part}</strong> : part
+                              {paquete.descripcion.map((parrafo) => (
+                                <p 
+                                  key={`${paquete.id}-${parrafo.substring(0, 20)}`} 
+                                  className="text-gray-700 text-base leading-relaxed text-left"
+                                >
+                                  {parrafo.split('**').map((part, i, arr) => 
+                                    i % 2 === 1 ? (
+                                      <strong 
+                                        key={`${paquete.id}-${part.substring(0, 10)}-${i}`} 
+                                        style={{ color: '#55408B' }}
+                                      >
+                                        {part}
+                                      </strong>
+                                    ) : part
                                   )}
                                 </p>
                               ))}
@@ -191,15 +186,15 @@ const PaquetesMobile = () => {
 
           {/* Puntos de Navegación */}
           <div className="flex justify-center mt-6 space-x-2">
-            {paquetes.map((_, index) => (
+            {paquetes.map((paquete) => (
               <button
-                key={index}
-                onClick={() => goToSlide(index)}
+                key={`nav-${paquete.id}`}
+                onClick={() => goToSlide(paquetes.indexOf(paquete))}
                 disabled={isAnimating}
                 className="transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label={`Ir al paquete ${index + 1}`}
+                aria-label={`Ir al paquete ${paquete.titulo}`}
               >
-                {index === currentSlide ? (
+                {paquetes.indexOf(paquete) === currentSlide ? (
                   <RadioButtonCheckedIcon className="text-purple-700 w-5 h-5" />
                 ) : (
                   <RadioButtonUncheckedIcon className="text-purple-400 w-5 h-5 hover:text-purple-600" />
@@ -254,4 +249,4 @@ const PaquetesMobile = () => {
   );
 };
 
-export default PaquetesMobile; 
+export default PaquetesMobile;
