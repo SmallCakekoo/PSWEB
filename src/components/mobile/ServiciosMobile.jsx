@@ -1,28 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const OverlayServicioMobile = ({ open, onClose, data }) => {
-  if (!open || !data) return null;
-  
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {
-      onClose();
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    if (open && dialogRef.current) {
+      dialogRef.current.showModal();
+    } else if (!open && dialogRef.current) {
+      dialogRef.current.close();
     }
-  };
+  }, [open]);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
+  if (!data) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    <dialog
+      ref={dialogRef}
+      className="fixed inset-0 z-50 p-4 bg-transparent"
       style={{
-        background: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
       }}
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="overlay-title"
+      onClick={(e) => {
+        if (e.target === dialogRef.current) onClose();
+      }}
     >
       <div
         className="relative w-full max-w-sm animate-fadein bg-white rounded-2xl shadow-xl"
@@ -31,15 +45,16 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
           maxHeight: '90vh',
           overflow: 'hidden',
         }}
-        onClick={e => e.stopPropagation()}
       >
         <div className="bg-[#55408B] rounded-t-2xl px-4 py-3 flex items-center justify-between">
-          <h2 id="overlay-title" className="text-lg font-medium text-white truncate">{data.titulo}</h2>
+          <h2 id="overlay-title" className="text-lg font-medium text-white truncate">
+            {data.titulo}
+          </h2>
           <button
+            type="button"
             onClick={onClose}
-            onKeyDown={handleKeyDown}
             className="text-white hover:text-gray-200 hover:scale-110 transition-all duration-200 text-2xl font-light w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/10"
-            aria-label="Cerrar"
+            aria-label="Cerrar diálogo"
           >
             ×
           </button>
@@ -71,8 +86,15 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
           </div>
         </div>
       </div>
-      
+
       <style>{`
+        dialog {
+          margin: auto;
+          border: none;
+        }
+        dialog::backdrop {
+          background: rgba(255, 255, 255, 0.95);
+        }
         @keyframes fadein {
           0% { opacity: 0; transform: scale(0.95); }
           100% { opacity: 1; transform: scale(1); }
@@ -81,11 +103,10 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
           animation: fadein 0.3s cubic-bezier(.4,0,.2,1);
         }
       `}</style>
-    </div>
+    </dialog>
   );
 };
 
-// Definición de PropTypes para OverlayServicioMobile
 OverlayServicioMobile.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
@@ -102,6 +123,41 @@ OverlayServicioMobile.propTypes = {
     })).isRequired
   })
 };
+
+const ServicioCard = ({ servicio, onClick }) => (
+  <article
+    className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+  >
+    <div className="p-4 pb-2">
+      <div className="w-full h-20 flex items-center justify-center mb-3">
+        <img
+          src={servicio.imagen}
+          alt={servicio.titulo}
+          className="w-full h-full object-contain"
+        />
+      </div>
+    </div>
+
+    <div className="px-4 pb-4">
+      <h3 className="text-base font-bold mb-2" style={{ color: '#55408B' }}>
+        {servicio.titulo}
+      </h3>
+      <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
+        {servicio.descripcion}
+      </p>
+      <button
+        type="button"
+        className="w-full flex items-center justify-center gap-1 group-hover:gap-2 transition-all duration-200 font-medium rounded-xl shadow-md py-2 px-3 text-sm"
+        style={{ backgroundColor: '#A569E5', color: '#fff' }}
+        onClick={onClick}
+        aria-label={`Leer más sobre ${servicio.titulo}`}
+      >
+        <span>Leer más</span>
+        <ArrowForwardIcon className="w-3 h-3" />
+      </button>
+    </div>
+  </article>
+);
 
 const ServiciosMobile = () => {
   const [servicios, setServicios] = useState([]);
@@ -125,56 +181,29 @@ const ServiciosMobile = () => {
       className="py-12 px-4 min-h-screen flex items-center justify-center"
       style={{ backgroundColor: '#F9F4FE' }}
     >
-      <OverlayServicioMobile open={!!openId} onClose={() => setOpenId(null)} data={overlayData} />
+      <OverlayServicioMobile 
+        open={!!openId} 
+        onClose={() => setOpenId(null)} 
+        data={overlayData} 
+      />
+      
       <div className="w-full max-w-md mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
+        <header className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-3" style={{ color: '#55408B' }}>
             Mis Servicios
           </h2>
           <p className="text-lg text-gray-600">
             Te acompaño en tu proceso de crecimiento personal y bienestar emocional con servicios especializados y personalizados
           </p>
-        </div>
+        </header>
 
-        {/* Servicios Grid - 2 columnas en móvil */}
         <div className="grid grid-cols-2 gap-4">
           {servicios.map((servicio) => (
-            <div
+            <ServicioCard
               key={servicio.id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
-            >
-              {/* Imagen del servicio */}
-              <div className="p-4 pb-2">
-                <div className="w-full h-20 flex items-center justify-center mb-3">
-                  <img
-                    src={servicio.imagen}
-                    alt={servicio.titulo}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Contenido */}
-              <div className="px-4 pb-4">
-                <h3 className="text-base font-bold mb-2" style={{ color: '#55408B' }}>
-                  {servicio.titulo}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
-                  {servicio.descripcion}
-                </p>
-                {/* Botón */}
-                <button
-                  className="w-full flex items-center justify-center gap-1 group-hover:gap-2 transition-all duration-200 font-medium rounded-xl shadow-md py-2 px-3 text-sm cursor-pointer"
-                  style={{ backgroundColor: '#A569E5', color: '#fff' }}
-                  onClick={() => setOpenId(servicio.id)}
-                  aria-label={`Leer más sobre ${servicio.titulo}`}
-                >
-                  <span>Leer más</span>
-                  <ArrowForwardIcon className="w-3 h-3" />
-                </button>
-              </div>
-            </div>
+              servicio={servicio}
+              onClick={() => setOpenId(servicio.id)}
+            />
           ))}
         </div>
       </div>
