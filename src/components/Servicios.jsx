@@ -3,6 +3,20 @@ import PropTypes from 'prop-types';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const OverlayServicio = ({ open, onClose, data }) => {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose, open]);
+
   if (!open || !data) return null;
 
   const handleBackdropClick = (e) => {
@@ -11,20 +25,11 @@ const OverlayServicio = ({ open, onClose, data }) => {
     }
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
-
   return (
-    <dialog
-      open={open}
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
       className="fixed inset-0 z-40 w-full h-full bg-transparent"
       style={{
         background: 'rgba(255, 255, 255, 0.45)',
@@ -33,6 +38,12 @@ const OverlayServicio = ({ open, onClose, data }) => {
         transition: 'background 0.3s',
       }}
       onClick={handleBackdropClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      }}
+      tabIndex={-1}
     >
       <div
         className="relative max-w-2xl w-full m-auto mt-20 animate-fadein"
@@ -96,7 +107,7 @@ const OverlayServicio = ({ open, onClose, data }) => {
           .p-10, .p-8, .p-6, .p-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
         }
       `}</style>
-    </dialog>
+    </div>
   );
 };
 

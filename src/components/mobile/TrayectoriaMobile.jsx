@@ -157,7 +157,7 @@ const TrayectoriaMobile = () => {
           <div className="flex-1 mx-4">
             <div className="flex items-center justify-center space-x-3">
               {timelineData.map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center">
+                <div key={`timeline-${item.date}-${idx}`} className="flex flex-col items-center">
                   <div 
                     className={`w-5 h-5 rounded-full transition-all duration-300 ${
                       idx === activeIndex 
