@@ -75,19 +75,19 @@ const Paquetes = () => {
   return (
     <section 
       id="paquetes"
-      className="py-16 px-4 flex items-center justify-center pt-32" 
+      className="py-12 md:py-16 px-4 md:px-6 flex items-center justify-center pt-24 md:pt-32" 
       style={{ backgroundColor: '#F9F4FE', width: '100vw', height: '100vh' }}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl md:max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4" style={{ color: '#55408B' }}>
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#55408B' }}>
             Mis Paquetes
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-2">
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl md:max-w-3xl mx-auto mb-2 px-4">
             Explora los planes disponibles y elige el que mejor se adapte a ti. ¡Hablemos en persona para concretarlo!
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs md:text-sm text-gray-500">
             Las sesiones virtuales pueden realizarse por videollamada o Google Meet.
           </p>
         </div>
@@ -98,25 +98,25 @@ const Paquetes = () => {
           <button
             onClick={prevSlide}
             disabled={isAnimating}
-            className="absolute -left-16 top-1/2 transform -translate-y-1/2 z-0 w-12 h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute -left-8 md:-left-16 top-1/2 transform -translate-y-1/2 z-0 w-10 h-10 md:w-12 md:h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Paquete anterior"
           >
-            <ArrowBackIcon className="text-purple-700 w-6 h-6" />
+            <ArrowBackIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Flecha Derecha */}
           <button
             onClick={nextSlide}
             disabled={isAnimating}
-            className="absolute -right-16 top-1/2 transform -translate-y-1/2 z-0 w-12 h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute -right-8 md:-right-16 top-1/2 transform -translate-y-1/2 z-0 w-10 h-10 md:w-12 md:h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Paquete siguiente"
           >
-            <ArrowForwardIcon className="text-purple-700 w-6 h-6" />
+            <ArrowForwardIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Contenedor de Tarjetas */}
           <div className="flex justify-center">
-            <div className="flex gap-8 max-w-6xl">
+            <div className="flex gap-4 md:gap-8 max-w-5xl md:max-w-6xl">
               {[0, 1, 2].map((position) => {
                 const paqueteIndex = getRotatedIndex(position);
                 const paquete = paquetes[paqueteIndex];
@@ -126,8 +126,8 @@ const Paquetes = () => {
                 const isFlipped = flippedCards[paquete.id];
                 
                 return (
-                  <div key={`${position}-${paqueteIndex}`} className="w-80 flex-shrink-0">
-                    <div className={`relative w-full h-96 ${getAnimationClasses(position)}`}>
+                  <div key={`${position}-${paqueteIndex}`} className="w-64 md:w-80 flex-shrink-0">
+                    <div className={`relative w-full h-80 md:h-96 ${getAnimationClasses(position)}`}>
                       {/* Flip Card Container */}
                       <div 
                         className="relative w-full h-full transition-transform duration-700"
@@ -138,11 +138,11 @@ const Paquetes = () => {
                       >
                         {/* Frente de la tarjeta */}
                         <div 
-                          className="absolute w-full h-full bg-white rounded-xl shadow-lg p-6"
+                          className="absolute w-full h-full bg-white rounded-xl shadow-lg p-4 md:p-6"
                           style={{ backfaceVisibility: 'hidden' }}
                         >
-                          <div className="flex items-center justify-center mb-6">
-                            <div className="w-20 h-20 flex items-center justify-center">
+                          <div className="flex items-center justify-center mb-4 md:mb-6">
+                            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
                               <img
                                 src={paquete.imagen}
                                 alt={paquete.titulo}
@@ -151,25 +151,25 @@ const Paquetes = () => {
                             </div>
                           </div>
 
-                          <div className="text-center mb-6">
-                            <h3 className="text-xl font-bold mb-2" style={{ color: '#55408B' }}>
+                          <div className="text-center mb-4 md:mb-6">
+                            <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: '#55408B' }}>
                               {paquete.titulo}
                             </h3>
-                            <p className="text-gray-600 text-sm mb-4">
+                            <p className="text-gray-600 text-xs md:text-sm mb-3 md:mb-4">
                               {paquete.subtitulo}
                             </p>
                           </div>
 
-                          <div className="space-y-2 mb-6">
-                            <div className="flex justify-between items-center text-sm">
+                          <div className="space-y-2 mb-4 md:mb-6">
+                            <div className="flex justify-between items-center text-xs md:text-sm">
                               <span className="text-gray-600">Duración:</span>
                               <span className="font-medium text-gray-800">{paquete.duracion}</span>
                             </div>
-                            <div className="flex justify-between items-center text-sm">
+                            <div className="flex justify-between items-center text-xs md:text-sm">
                               <span className="text-gray-600">Modalidad:</span>
                               <span className="font-medium text-gray-800">{paquete.modalidad}</span>
                             </div>
-                            <div className="flex justify-between items-center text-sm">
+                            <div className="flex justify-between items-center text-xs md:text-sm">
                               <span className="text-gray-600">Precio:</span>
                               <span className="font-bold" style={{ color: '#55408B' }}>{paquete.precio}</span>
                             </div>
@@ -177,7 +177,7 @@ const Paquetes = () => {
 
                           <div className="text-center">
                             <button 
-                              className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-3 px-4 text-sm cursor-pointer"
+                              className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-2 md:!py-3 px-3 md:px-4 text-xs md:text-sm cursor-pointer"
                               style={{ backgroundColor: '#A569E5', color: '#fff' }}
                               onClick={() => toggleCard(paquete.id)}
                               aria-label={`Leer más sobre ${paquete.titulo}`}
@@ -190,7 +190,7 @@ const Paquetes = () => {
 
                         {/* Reverso de la tarjeta */}
                         <div 
-                          className="absolute w-full h-full bg-white rounded-xl shadow-lg p-6"
+                          className="absolute w-full h-full bg-white rounded-xl shadow-lg p-4 md:p-6"
                           style={{ 
                             backfaceVisibility: 'hidden',
                             transform: 'rotateY(180deg)'
@@ -198,14 +198,14 @@ const Paquetes = () => {
                         >
                           <div className="h-full flex flex-col">
                             {/* Header del reverso */}
-                            <div className="text-center mb-6">
-                              <h3 className="text-xl font-bold mb-2" style={{ color: '#55408B' }}>
+                            <div className="text-center mb-4 md:mb-6">
+                              <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: '#55408B' }}>
                                 {paquete.titulo}
                               </h3>
                             </div>
 
                             {/* Contenido del reverso */}
-                            <div className="flex-1 space-y-4 overflow-y-auto pr-2" style={{
+                            <div className="flex-1 space-y-3 md:space-y-4 overflow-y-auto pr-2" style={{
                               scrollbarWidth: 'thin',
                               scrollbarColor: '#A569E5 #f3eafd'
                             }}>
@@ -213,7 +213,7 @@ const Paquetes = () => {
                                 <p 
                                   // Usar una combinación única del ID del paquete y el contenido del párrafo
                                   key={`${paquete.id}-${parrafo.substring(0, 20)}`} 
-                                  className="text-gray-700 text-sm leading-relaxed text-left"
+                                  className="text-gray-700 text-xs md:text-sm leading-relaxed text-left"
                                 >
                                   {parrafo.split('**').map((part, i, array) => 
                                     i % 2 === 1 
@@ -231,15 +231,15 @@ const Paquetes = () => {
                             </div>
 
                             {/* Botón Volver */}
-                            <div className="text-center mt-4">
+                            <div className="text-center mt-3 md:mt-4">
                               <button
                                 onClick={() => toggleCard(paquete.id)}
-                                className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-3 px-4 text-sm cursor-pointer"
+                                className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-2 md:!py-3 px-3 md:px-4 text-xs md:text-sm cursor-pointer"
                                 style={{ backgroundColor: '#A569E5', color: '#fff' }}
                                 aria-label="Volver al frente de la tarjeta"
                               >
                                 <span>Volver</span>
-                                <ArrowBackIcon className="w-4 h-4" />
+                                <ArrowBackIcon className="w-3 h-3 md:w-4 md:h-4" />
                               </button>
                             </div>
                           </div>
@@ -253,7 +253,7 @@ const Paquetes = () => {
           </div>
 
           {/* Puntos de Navegación */}
-          <div className="flex justify-center mt-8 space-x-2">
+          <div className="flex justify-center mt-6 md:mt-8 space-x-2">
             {paquetes.map((paquete, index) => (
               <button
                 key={`nav-${paquete.id}-${index}`}
@@ -263,9 +263,9 @@ const Paquetes = () => {
                 aria-label={`Ir al paquete ${paquete.titulo}`}
               >
                 {index === currentSlide ? (
-                  <RadioButtonCheckedIcon className="text-purple-700 w-6 h-6" />
+                  <RadioButtonCheckedIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
                 ) : (
-                  <RadioButtonUncheckedIcon className="text-purple-400 w-6 h-6 hover:text-purple-600" />
+                  <RadioButtonUncheckedIcon className="text-purple-400 w-5 h-5 md:w-6 md:h-6 hover:text-purple-600" />
                 )}
               </button>
             ))}

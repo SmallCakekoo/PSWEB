@@ -41,3 +41,41 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Estilos para BGPC y responsive */
+#inicio {
+  position: relative;
+  overflow: hidden;
+}
+
+#inicio img[src*="BGPC"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Ajustes específicos para tablet horizontal */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #inicio img[src*="BGPC"] {
+    object-position: center top;
+  }
+}
+
+/* Ajustes para resoluciones específicas problemáticas */
+@media (min-width: 1323px) and (max-width: 1630px) {
+  #inicio img[src*="BGPC"] {
+    object-position: center top;
+  }
+}
+
+/* Eliminar gap entre Hero y SobreMi */
+#sobre-mi {
+  margin-top: 0;
+  padding-top: 0;
+}

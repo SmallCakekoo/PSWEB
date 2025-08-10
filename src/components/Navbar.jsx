@@ -21,19 +21,19 @@ const Navbar = () => {
         ? 'bg-white/95 backdrop-blur-md shadow-lg' 
         : 'bg-transparent'
     }`}>
-      <div className="relative flex flex-col md:flex-row items-center justify-between px-8 py-4 mx-50 overflow-hidden">
+      <div className="relative flex flex-col md:flex-row lg:flex-row items-center justify-between px-6 lg:px-8 py-4 mx-auto lg:mx-50 overflow-hidden">
         {/* Logo */}
         <div className="flex items-center gap-2">
           <img 
             src={Logo} 
             alt="Logo Sara Plaza" 
-            className="h-16" 
+            className="h-12 lg:h-16" 
             width="64"
             height="64"
           />
         </div>
         {/* Botón hamburguesa DaisyUI */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <button
             className="btn btn-ghost btn-circle"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -67,10 +67,10 @@ const Navbar = () => {
         {/* Enlaces */}
         <ul
           className={`
-            menu menu-vertical md:menu-horizontal bg-white md:bg-transparent rounded-box md:rounded-none shadow md:shadow-none
-            absolute md:static top-16 left-4 right-4 md:left-auto md:right-auto md:w-auto transition-all duration-300
-            ${menuOpen ? "flex" : "hidden"} md:flex
-            gap-0 md:gap-8 font-medium text-sm md:text-base
+            menu menu-vertical md:menu-horizontal lg:menu-horizontal bg-white md:bg-transparent lg:bg-transparent rounded-box md:rounded-none lg:rounded-none shadow md:shadow-none lg:shadow-none
+            absolute md:static lg:static top-16 left-4 right-4 md:left-auto md:right-auto lg:left-auto lg:right-auto md:w-auto lg:w-auto transition-all duration-300
+            ${menuOpen ? "flex" : "hidden"} md:flex lg:flex
+            gap-0 md:gap-6 lg:gap-8 font-medium text-sm md:text-base lg:text-base
             ${isScrolled ? 'text-[#2D1A47]' : 'text-[#55408B]'}
           `}
         >
@@ -96,7 +96,7 @@ const Navbar = () => {
         {/* Fondo oscuro al abrir menú en móvil */}
         {menuOpen && (
           <button
-            className="fixed inset-0 bg-black bg-opacity-10 z-10 md:hidden cursor-pointer w-full h-full border-none"
+            className="fixed inset-0 bg-black bg-opacity-10 z-10 lg:hidden cursor-pointer w-full h-full border-none"
             onClick={() => setMenuOpen(false)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
