@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 // Componente separado para renderizar una línea de contenido
 const ContentLine = ({ line, isFirst }) => {
-  if (isFirst && line.includes('|')) {
+  if (!line) return null;
+
+  if (isFirst && typeof line === 'string' && line.includes('|')) {
     const [title, date] = line.split('|').map(s => s.trim());
     return (
       <div className="mb-3">
@@ -18,7 +21,7 @@ const ContentLine = ({ line, isFirst }) => {
     );
   }
 
-  if (isFirst && !line.includes('|') && line.length < 100) {
+  if (isFirst && typeof line === 'string' && !line.includes('|') && line.length < 100) {
     return (
       <h4 className="font-semibold text-base mb-2" style={{ color: '#55408B' }}>
         {line}
@@ -33,16 +36,32 @@ const ContentLine = ({ line, isFirst }) => {
   );
 };
 
+ContentLine.propTypes = {
+  line: PropTypes.string.isRequired,
+  isFirst: PropTypes.bool.isRequired
+};
+
 // Componente separado para una sección de contenido
 const ContentSection = ({ section, isLastSection }) => {
+  if (!Array.isArray(section)) return null;
+
   return (
     <>
       {section.map((line, lineIndex) => (
-        <ContentLine key={lineIndex} line={line} isFirst={lineIndex === 0} />
+        <ContentLine 
+          key={`line-${line}-${lineIndex}`} 
+          line={line} 
+          isFirst={lineIndex === 0} 
+        />
       ))}
       {!isLastSection && <div className="w-full h-px bg-gray-200 my-3"></div>}
     </>
   );
+};
+
+ContentSection.propTypes = {
+  section: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isLastSection: PropTypes.bool.isRequired
 };
 
 const TrayectoriaMobile = () => {
@@ -53,7 +72,7 @@ const TrayectoriaMobile = () => {
     fetch('/data/timeline.json')
       .then(res => res.json())
       .then(data => setTimelineData(data))
-      .catch(() => {});
+      .catch(error => console.error('Error loading timeline data:', error));
   }, []);
 
   const handlePrev = () => {
@@ -65,6 +84,8 @@ const TrayectoriaMobile = () => {
   };
 
   const splitContentIntoSections = (content) => {
+    if (!Array.isArray(content)) return [];
+    
     const sections = [];
     let currentSection = [];
     
@@ -87,14 +108,17 @@ const TrayectoriaMobile = () => {
   const renderContent = (content) => {
     const sections = splitContentIntoSections(content);
     
-    return sections.map((section, index) => (
-      <div key={index} className="mb-4">
-        <ContentSection 
-          section={section} 
-          isLastSection={index === sections.length - 1} 
-        />
-      </div>
-    ));
+    return sections.map((section, index) => {
+      const sectionKey = section.join('-'); // Crear una key única basada en el contenido
+      return (
+        <div key={`section-${sectionKey}`} className="mb-4">
+          <ContentSection 
+            section={section} 
+            isLastSection={index === sections.length - 1} 
+          />
+        </div>
+      );
+    });
   };
 
   if (timelineData.length === 0) {
