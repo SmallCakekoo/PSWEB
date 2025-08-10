@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const OverlayServicio = ({ open, onClose, data }) => {
   if (!open || !data) return null;
-  
+
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
       onClose();
@@ -11,22 +12,20 @@ const OverlayServicio = ({ open, onClose, data }) => {
   };
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-      className="fixed inset-0 z-40 flex items-center justify-center"
+    <dialog
+      open={open}
+      className="fixed inset-0 z-40 w-full h-full bg-transparent"
       style={{
         background: 'rgba(255, 255, 255, 0.45)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
         transition: 'background 0.3s',
       }}
-      onClick={onClose}
+      onClose={onClose}
       onKeyDown={handleKeyDown}
     >
       <div
-        className="relative max-w-2xl w-full animate-fadein"
+        className="relative max-w-2xl w-full m-auto mt-20 animate-fadein"
         style={{
           borderRadius: '2rem',
           background: '#fff',
@@ -35,12 +34,11 @@ const OverlayServicio = ({ open, onClose, data }) => {
           padding: '0 0 2.5rem 0',
           minHeight: '420px',
         }}
-        onClick={e => e.stopPropagation()}
       >
-        {/* Header con fondo morado */}
         <div className="bg-[#55408B] rounded-t-[2rem] px-6 py-4 flex items-center justify-between">
           <h2 id="modal-title" className="text-2xl font-medium text-white">{data.titulo}</h2>
           <button
+            type="button"
             onClick={onClose}
             className="text-white hover:text-gray-200 hover:scale-110 transition-all duration-200 text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10"
             aria-label="Cerrar"
@@ -48,7 +46,6 @@ const OverlayServicio = ({ open, onClose, data }) => {
             ×
           </button>
         </div>
-        {/* Contenido */}
         <div className="space-y-10 px-6 pt-6">
           {data.contenido?.map((item) => (
             <div 
@@ -76,7 +73,6 @@ const OverlayServicio = ({ open, onClose, data }) => {
           ))}
         </div>
       </div>
-      {/* Animación fade-in */}
       <style>{`
         @keyframes fadein {
           0% { opacity: 0; transform: scale(0.97); }
@@ -90,8 +86,25 @@ const OverlayServicio = ({ open, onClose, data }) => {
           .p-10, .p-8, .p-6, .p-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
         }
       `}</style>
-    </div>
+    </dialog>
   );
+};
+
+// PropTypes para OverlayServicio
+OverlayServicio.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    titulo: PropTypes.string.isRequired,
+    contenido: PropTypes.arrayOf(PropTypes.shape({
+      titulo: PropTypes.string.isRequired,
+      icono: PropTypes.string.isRequired,
+      texto: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]).isRequired
+    }))
+  })
 };
 
 const Servicios = () => {
