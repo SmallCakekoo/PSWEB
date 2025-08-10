@@ -5,11 +5,22 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const OverlayServicio = ({ open, onClose, data }) => {
   if (!open || !data) return null;
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
       onClose();
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   return (
     <dialog
@@ -21,8 +32,7 @@ const OverlayServicio = ({ open, onClose, data }) => {
         WebkitBackdropFilter: 'blur(8px)',
         transition: 'background 0.3s',
       }}
-      onClose={onClose}
-      onKeyDown={handleKeyDown}
+      onClick={handleBackdropClick}
     >
       <div
         className="relative max-w-2xl w-full m-auto mt-20 animate-fadein"
@@ -161,7 +171,7 @@ const Servicios = () => {
             <button
               key={servicio.id}
               onClick={() => setOpenId(servicio.id)}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group text-left"
+              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group text-left cursor-pointer"
               aria-label={`Ver más detalles sobre ${servicio.titulo}`}
             >
               <div className="p-6 pb-4">

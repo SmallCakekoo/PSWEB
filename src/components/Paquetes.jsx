@@ -254,13 +254,13 @@ const Paquetes = () => {
 
           {/* Puntos de Navegación */}
           <div className="flex justify-center mt-8 space-x-2">
-            {paquetes.map((_, index) => (
+            {paquetes.map((paquete, index) => (
               <button
-                key={index}
+                key={`nav-${paquete.id}-${index}`}
                 onClick={() => goToSlide(index)}
                 disabled={isAnimating}
                 className="transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label={`Ir al paquete ${index + 1}`}
+                aria-label={`Ir al paquete ${paquete.titulo}`}
               >
                 {index === currentSlide ? (
                   <RadioButtonCheckedIcon className="text-purple-700 w-6 h-6" />

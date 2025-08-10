@@ -12,76 +12,69 @@ const OverlayServicioMobile = ({ open, onClose, data }) => {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    <dialog
+      open={open}
+      className="fixed inset-0 z-50 w-full h-full bg-transparent p-4"
       style={{
         background: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
       }}
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="overlay-title"
+      onClose={onClose}
     >
-      <div
-        className="relative w-full max-w-sm animate-fadein bg-white rounded-2xl shadow-xl"
-        style={{
-          border: '1.5px solid #ede7f6',
-          maxHeight: '90vh',
-          overflow: 'hidden',
-        }}
-        onClick={e => e.stopPropagation()}
+      <div 
+        className="mx-auto flex items-center justify-center h-full"
+        onClick={onClose}
       >
-        <div className="bg-[#55408B] rounded-t-2xl px-4 py-3 flex items-center justify-between">
-          <h2 id="overlay-title" className="text-lg font-medium text-white truncate">{data.titulo}</h2>
-          <button
-            onClick={onClose}
-            onKeyDown={handleKeyDown}
-            className="text-white hover:text-gray-200 hover:scale-110 transition-all duration-200 text-2xl font-light w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/10"
-            aria-label="Cerrar"
-          >
-            ×
-          </button>
-        </div>
-        
-        <div className="overflow-y-auto" style={{ maxHeight: 'calc(90vh - 60px)' }}>
-          <div className="space-y-6 px-4 py-4">
-            {data.contenido.map((item) => (
-              <div key={item.id || item.titulo} className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-white/70 border border-[#e5d6fa] rounded-full flex items-center justify-center shadow-md">
-                  <img src={item.icono} alt={`Icono de ${item.titulo}`} className="w-6 h-6 object-contain" />
-                </div>
-                <div className="flex-1 flex flex-col justify-start">
-                  <h3 className="font-bold text-lg text-[#55408B] mb-2 text-left" style={{letterSpacing: '-0.5px'}}>{item.titulo}</h3>
-                  {Array.isArray(item.texto) ? (
-                    <div className="text-gray-700 text-sm leading-relaxed text-left">
-                      {item.texto.map((t) => (
-                        <div key={t} className="mb-1">
-                          <span className="text-[#A569E5] font-bold">·</span> {t}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-gray-700 text-sm leading-relaxed text-left">{item.texto}</p>
-                  )}
-                </div>
-              </div>
-            ))}
+        <button
+          className="relative w-full max-w-sm animate-fadein bg-white rounded-2xl shadow-xl"
+          style={{
+            border: '1.5px solid #ede7f6',
+            maxHeight: '90vh',
+            overflow: 'hidden',
+          }}
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="bg-[#55408B] rounded-t-2xl px-4 py-3 flex items-center justify-between">
+            <h2 id="overlay-title" className="text-lg font-medium text-white truncate">{data.titulo}</h2>
+            <button
+              onClick={onClose}
+              onKeyDown={handleKeyDown}
+              className="text-white hover:text-gray-200 hover:scale-110 transition-all duration-200 text-2xl font-light w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/10"
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
           </div>
-        </div>
+          
+          <div className="overflow-y-auto" style={{ maxHeight: 'calc(90vh - 60px)' }}>
+            <div className="space-y-6 px-4 py-4">
+              {data.contenido.map((item) => (
+                <div key={item.id || item.titulo} className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-white/70 border border-[#e5d6fa] rounded-full flex items-center justify-center shadow-md">
+                    <img src={item.icono} alt={`Icono de ${item.titulo}`} className="w-6 h-6 object-contain" />
+                  </div>
+                  <div className="flex-1 flex flex-col justify-start">
+                    <h3 className="font-bold text-lg text-[#55408B] mb-2 text-left" style={{letterSpacing: '-0.5px'}}>{item.titulo}</h3>
+                    {Array.isArray(item.texto) ? (
+                      <div className="text-gray-700 text-sm leading-relaxed text-left">
+                        {item.texto.map((t) => (
+                          <div key={t} className="mb-1">
+                            <span className="text-[#A569E5] font-bold">·</span> {t}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-gray-700 text-sm leading-relaxed text-left">{item.texto}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </button>
       </div>
-      
-      <style>{`
-        @keyframes fadein {
-          0% { opacity: 0; transform: scale(0.95); }
-          100% { opacity: 1; transform: scale(1); }
-        }
-        .animate-fadein {
-          animation: fadein 0.3s cubic-bezier(.4,0,.2,1);
-        }
-      `}</style>
-    </div>
+    </dialog>
   );
 };
 

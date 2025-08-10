@@ -137,7 +137,7 @@ const NavbarMobile = () => {
           <div
             className="fixed inset-0 backdrop-blur-sm bg-white/20 z-20 md:hidden"
             onClick={() => setMenuOpen(false)}
-            role="presentation"
+            aria-hidden="true"
           />
         )}
       </div>
