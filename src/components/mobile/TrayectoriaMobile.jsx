@@ -2,6 +2,49 @@ import { useState, useEffect } from "react";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+// Componente separado para renderizar una línea de contenido
+const ContentLine = ({ line, isFirst }) => {
+  if (isFirst && line.includes('|')) {
+    const [title, date] = line.split('|').map(s => s.trim());
+    return (
+      <div className="mb-3">
+        <h4 className="font-semibold text-base" style={{ color: '#55408B' }}>
+          {title}
+        </h4>
+        <p className="text-xs italic" style={{ color: '#A569E5' }}>
+          {date}
+        </p>
+      </div>
+    );
+  }
+
+  if (isFirst && !line.includes('|') && line.length < 100) {
+    return (
+      <h4 className="font-semibold text-base mb-2" style={{ color: '#55408B' }}>
+        {line}
+      </h4>
+    );
+  }
+
+  return (
+    <p className="text-sm mb-2 leading-relaxed" style={{ color: '#11051D' }}>
+      {line}
+    </p>
+  );
+};
+
+// Componente separado para una sección de contenido
+const ContentSection = ({ section, isLastSection }) => {
+  return (
+    <>
+      {section.map((line, lineIndex) => (
+        <ContentLine key={lineIndex} line={line} isFirst={lineIndex === 0} />
+      ))}
+      {!isLastSection && <div className="w-full h-px bg-gray-200 my-3"></div>}
+    </>
+  );
+};
+
 const TrayectoriaMobile = () => {
   const [timelineData, setTimelineData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -9,39 +52,27 @@ const TrayectoriaMobile = () => {
   useEffect(() => {
     fetch('/data/timeline.json')
       .then(res => res.json())
-      .then(data => {
-        setTimelineData(data);
-      })
-      .catch(() => {
-      });
+      .then(data => setTimelineData(data))
+      .catch(() => {});
   }, []);
 
   const handlePrev = () => {
-    setActiveIndex((prev) => {
-      const newIndex = prev === 0 ? timelineData.length - 1 : prev - 1;
-      return newIndex;
-    });
+    setActiveIndex(prev => prev === 0 ? timelineData.length - 1 : prev - 1);
   };
   
   const handleNext = () => {
-    setActiveIndex((prev) => {
-      const newIndex = prev === timelineData.length - 1 ? 0 : prev + 1;
-      return newIndex;
-    });
+    setActiveIndex(prev => prev === timelineData.length - 1 ? 0 : prev + 1);
   };
 
-  // Función para renderizar el contenido de manera estructurada
-  const renderContent = (content) => {
+  const splitContentIntoSections = (content) => {
     const sections = [];
     let currentSection = [];
     
     content.forEach((line) => {
-      if (line.trim() === '') {
-        if (currentSection.length > 0) {
-          sections.push(currentSection);
-          currentSection = [];
-        }
-      } else {
+      if (line.trim() === '' && currentSection.length > 0) {
+        sections.push(currentSection);
+        currentSection = [];
+      } else if (line.trim() !== '') {
         currentSection.push(line);
       }
     });
@@ -50,47 +81,22 @@ const TrayectoriaMobile = () => {
       sections.push(currentSection);
     }
 
-    return sections.map((section, sectionIndex) => (
-      <div key={sectionIndex} className="mb-4">
-        {section.map((line, lineIndex) => {
-          // Si es la primera línea y contiene "|", es un título con fecha
-          if (lineIndex === 0 && line.includes('|')) {
-            const [title, date] = line.split('|').map(s => s.trim());
-            return (
-              <div key={lineIndex} className="mb-3">
-                <h4 className="font-semibold text-base" style={{ color: '#55408B' }}>
-                  {title}
-                </h4>
-                <p className="text-xs italic" style={{ color: '#A569E5' }}>
-                  {date}
-                </p>
-              </div>
-            );
-          }
-          // Si es una línea que parece ser un título (sin "|" pero en posición 0)
-          else if (lineIndex === 0 && !line.includes('|') && line.length < 100) {
-            return (
-              <h4 key={lineIndex} className="font-semibold text-base mb-2" style={{ color: '#55408B' }}>
-                {line}
-              </h4>
-            );
-          }
-          // Para el resto de líneas
-          else {
-            return (
-              <p key={lineIndex} className="text-sm mb-2 leading-relaxed" style={{ color: '#11051D' }}>
-                {line}
-              </p>
-            );
-          }
-        })}
-        {sectionIndex < sections.length - 1 && (
-          <div className="w-full h-px bg-gray-200 my-3"></div>
-        )}
+    return sections;
+  };
+
+  const renderContent = (content) => {
+    const sections = splitContentIntoSections(content);
+    
+    return sections.map((section, index) => (
+      <div key={index} className="mb-4">
+        <ContentSection 
+          section={section} 
+          isLastSection={index === sections.length - 1} 
+        />
       </div>
     ));
   };
- 
+
   if (timelineData.length === 0) {
     return (
       <section className="w-screen min-h-screen flex flex-col items-center justify-center py-8 px-4 bg-primary-light">
@@ -193,4 +199,4 @@ const TrayectoriaMobile = () => {
   );
 };
 
-export default TrayectoriaMobile; 
+export default TrayectoriaMobile;
