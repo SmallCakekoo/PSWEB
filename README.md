@@ -26,9 +26,9 @@
 
 ### 💼 Paquetes de Servicios
 
-- **Sesión Personalizada**: $60.000 COP (45-50 minutos)
-- **Paquete Mensual**: $220.000 COP (4 sesiones)
-- **Paquete Trimestral**: $550.000 COP (10 sesiones con 10% descuento)
+- **Sesión Personalizada**: $70.000 COP (45-50 minutos)
+- **Paquete Mensual**: $250.000 COP (4 sesiones)
+- **Paquete Trimestral**: $600.000 COP (10 sesiones con 10% descuento)
 
 ### 🛠️ Tecnologías Utilizadas
 

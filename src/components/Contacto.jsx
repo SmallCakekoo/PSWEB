@@ -2,6 +2,11 @@ import React, { useState, useRef } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import emailjs from '@emailjs/browser';
 
+// Al inicio del archivo Contacto.jsx
+const SERVICE_ID = import.meta.env.VITE_SERVICE_ID || '';
+const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID || '';
+const PUBLIC_KEY = import.meta.env.VITE_MAIL_PUBLIC_KEY || '';
+
 const Contacto = () => {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -29,10 +34,10 @@ const Contacto = () => {
     
     // Enviar el formulario usando EmailJS
     emailjs.sendForm(
-      'service_pdiykr6', // service_id
-      'template_pcg7j9l', // template_id
+      SERVICE_ID, // service ID
+      TEMPLATE_ID, // template ID
       form.current,
-      'Y39zB1srIc4hX2-H_' // public_key
+      PUBLIC_KEY // public key
     )
     .then((result) => {
         setModalMessage('¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.');
