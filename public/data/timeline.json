@@ -1,96 +1,111 @@
 [
-  {
-    "id": 1,
-    "date": "2024",
-    "title": "Psicóloga - IPS Home and Health",
-    "description": [
-      "Palmira | Enero 2024 - Presente",
-      "Atención y valoración psicológica individual."
-    ],
-    "image": "TimelineIndependiente.svg"
-  },
-  {
-    "id": 2,
-    "date": "2023",
-    "title": "Psicóloga Independiente & Fundación Vida Luz del Sol",
-    "description": [
-      "Acompañamiento psicoterapéutico individual enfocado en el bienestar emocional.",
-      "Reafirmé mi compromiso con la salud mental como motor de cambio personal.",
-      "",
-      "Psicóloga - Fundación Vida Luz del Sol | Enero - Junio 2023",
-      "Acompañamiento a adultos con discapacidad cognitiva.",
-      "Diseño de talleres para la vida diaria y capacitaciones a padres."
-    ],
-    "image": "TimelinePadres.svg"
-  },
-  {
-    "id": 3,
-    "date": "2022",
-    "title": "Graduación & Práctica Educativa",
-    "description": [
-      "Graduación - Psicóloga | Universidad Pontificia Bolivariana - Palmira",
-      "Me gradué como psicóloga, reafirmando mi compromiso con el bienestar emocional de las personas.",
-      "Participé como autora en Perspectivas clínicas psicológicas de caso.",
-      "",
-      "Practicante de Psicología Educativa | Colegio San José del Ávila | Febrero - Junio 2022",
-      "Diseño de talleres sobre gestión emocional y proyecto de vida.",
-      "Acompañamiento en psicoorientación y escuela para padres.",
-      "Trabajo directo con niños y jóvenes en contextos educativos."
-    ],
-    "image": "TimelineClases.svg"
-  },
-  {
-    "id": 4,
-    "date": "2021",
-    "title": "Practicante de Psicología Clínica - GESENCRO IPS",
-    "description": [
-      "Palmira | Julio - Noviembre 2021",
-      "Apoyo emocional a pacientes con enfermedades crónicas, como la diabetes.",
-      "Psicoeducación individual y grupal, presencial y por teleconsulta."
-    ],
-    "image": "TimelineAnciano.svg"
-  },
-  {
-    "id": 5,
-    "date": "2020",
-    "title": "Formación Continua",
-    "description": [
-      "Curso: Mujeres líderes de la transformación digital",
-      "Ministerio de Tecnologías de la Información y las Comunicaciones"
-    ],
-    "image": "ServicioIndividual.svg"
-  },
-  {
-    "id": 6,
-    "date": "2019",
-    "title": "Diplomado: Prevención e intervención del acoso escolar",
-    "description": [
-      "Politécnico de Colombia",
-      "Especialización en técnicas de prevención e intervención del bullying en contextos educativos."
-    ],
-    "image": "TimelineAlumno.svg"
-  },
-  {
-    "id": 7,
-    "date": "2018",
-    "title": "Atención al Cliente - Roka Comunicación Visual",
-    "description": [
-      "Palmira | Enero 2018 - Diciembre 2019",
-      "Servicio al cliente, manejo de correspondencia.",
-      "Desarrollo de habilidades de comunicación y atención al público."
-    ],
-    "image": "ServicioEmpresarial.svg"
-  },
-  {
-    "id": 8,
-    "date": "2017",
-    "title": "Bachiller Académica & Simposio Internacional",
-    "description": [
-      "Bachiller Académica | Colegio Sagrado Corazón de Jesús Hermanas Bethlemitas - Palmira",
-      "",
-      "Simposio Internacional: Tópicos en Psicología, Subjetividades y Contemporaneidad",
-      "Universidad Pontificia Bolivariana - Palmira"
-    ],
-    "image": "TimelineAlumno.svg"
-  }
+    {
+        "id": 0,
+        "date": "2025",
+        "title": "Psicóloga Independiente",
+        "description": [
+            "Palmira | Enero 2025 - Presente",
+            "Atención y valoración psicológica individual.",
+            "Acompañamiento psicoterapéutico individual enfocado en personas con discapacidad cognitiva.",
+            "",
+            "Certificados| Agosto 2025",
+            "Curso de primeros auxilios psicológicos - Cruz Roja Colombiana",
+            "Curso de atención a víctimas de violencia sexual - Cruz Roja Colombiana"
+        ],
+        "image": "TimelineIndependiente.svg"
+    },
+    {
+        "id": 1,
+        "date": "2024",
+        "title": "Psicóloga - IPS Home and Health",
+        "description": [
+            "Palmira | Enero 2024 - Presente",
+            "Atención y valoración psicológica individual."
+        ],
+        "image": "TimelineIndependiente.svg"
+    },
+    {
+        "id": 2,
+        "date": "2023",
+        "title": "Psicóloga Independiente & Fundación Vida Luz del Sol",
+        "description": [
+            "Acompañamiento psicoterapéutico individual enfocado en el bienestar emocional.",
+            "Reafirmé mi compromiso con la salud mental como motor de cambio personal.",
+            "",
+            "Psicóloga - Fundación Vida Luz del Sol | Enero - Junio 2023",
+            "Acompañamiento a adultos con discapacidad cognitiva.",
+            "Diseño de talleres para la vida diaria y capacitaciones a padres."
+        ],
+        "image": "TimelinePadres.svg"
+    },
+    {
+        "id": 3,
+        "date": "2022",
+        "title": "Graduación & Práctica Educativa",
+        "description": [
+            "Graduación - Psicóloga | Universidad Pontificia Bolivariana - Palmira",
+            "Me gradué como psicóloga, reafirmando mi compromiso con el bienestar emocional de las personas.",
+            "Participé como autora en Perspectivas clínicas psicológicas de caso.",
+            "",
+            "Practicante de Psicología Educativa | Colegio San José del Ávila | Febrero - Junio 2022",
+            "Diseño de talleres sobre gestión emocional y proyecto de vida.",
+            "Acompañamiento en psicoorientación y escuela para padres.",
+            "Trabajo directo con niños y jóvenes en contextos educativos."
+        ],
+        "image": "TimelineClases.svg"
+    },
+    {
+        "id": 4,
+        "date": "2021",
+        "title": "Practicante de Psicología Clínica - GESENCRO IPS",
+        "description": [
+            "Palmira | Julio - Noviembre 2021",
+            "Apoyo emocional a pacientes con enfermedades crónicas, como la diabetes.",
+            "Psicoeducación individual y grupal, presencial y por teleconsulta."
+        ],
+        "image": "TimelineAnciano.svg"
+    },
+    {
+        "id": 5,
+        "date": "2020",
+        "title": "Formación Continua",
+        "description": [
+            "Curso: Mujeres líderes de la transformación digital",
+            "Ministerio de Tecnologías de la Información y las Comunicaciones"
+        ],
+        "image": "ServicioIndividual.svg"
+    },
+    {
+        "id": 6,
+        "date": "2019",
+        "title": "Diplomado: Prevención e intervención del acoso escolar",
+        "description": [
+            "Politécnico de Colombia",
+            "Especialización en técnicas de prevención e intervención del bullying en contextos educativos."
+        ],
+        "image": "TimelineAlumno.svg"
+    },
+    {
+        "id": 7,
+        "date": "2018",
+        "title": "Atención al Cliente - Roka Comunicación Visual",
+        "description": [
+            "Palmira | Enero 2018 - Diciembre 2019",
+            "Servicio al cliente, manejo de correspondencia.",
+            "Desarrollo de habilidades de comunicación y atención al público."
+        ],
+        "image": "ServicioEmpresarial.svg"
+    },
+    {
+        "id": 8,
+        "date": "2017",
+        "title": "Bachiller Académica & Simposio Internacional",
+        "description": [
+            "Bachiller Académica | Colegio Sagrado Corazón de Jesús Hermanas Bethlemitas - Palmira",
+            "",
+            "Simposio Internacional: Tópicos en Psicología, Subjetividades y Contemporaneidad",
+            "Universidad Pontificia Bolivariana - Palmira"
+        ],
+        "image": "TimelineAlumno.svg"
+    }
 ]

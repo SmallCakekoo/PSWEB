@@ -154,7 +154,7 @@ const Trayectoria = () => {
             <div className="relative w-full max-w-4xl md:max-w-6xl flex items-center justify-center mb-8 md:mb-12 h-20 md:h-24">
                 <button 
                     onClick={handlePrev} 
-                    className="absolute left-0 z-5 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-[#A569E5]/20 transition-all duration-300 cursor-pointer active:scale-95"
+                    className="absolute left-0 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-[#A569E5]/20 transition-all duration-300 cursor-pointer active:scale-95"
                     aria-label="Anterior período de trayectoria"
                     disabled={timelineData.length === 0}
                 >
