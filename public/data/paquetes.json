@@ -6,7 +6,7 @@
         "duracion": "45 - 50 minutos",
         "modalidad": "Presencial/Virtual",
         "precio": "$70.000 COP",
-        "imagen": "/src/assets/images/PaquetePersonalizada.svg",
+        "imagen": "PaquetePersonalizada.svg",
         "descripcion": [
             "Una **sesión única** diseñada especialmente para ti, donde exploraremos juntos el motivo de tu consulta, recopilaremos información clave y construiremos una visión general de tu situación para diseñar un **plan terapéutico a tu medida**.",
             "Las sesiones individuales, que se realizan **semanalmente** o **cada 15 días**, se adaptan por completo a tus necesidades y son fundamentales para avanzar en tu proceso personal."
@@ -19,7 +19,7 @@
         "duracion": "4 ss. de 45 - 50 minutos",
         "modalidad": "Presencial/Virtual",
         "precio": "$250.000 COP",
-        "imagen": "/src/assets/images/PaqueteMensual.svg",
+        "imagen": "PaqueteMensual.svg",
         "descripcion": [
             "El **acompañamiento ideal** para establecer una rutina terapéutica que impulse tu crecimiento personal de manera constante y progresiva.",
             "El paquete mensual, adaptado a tus necesidades, incluye **4 sesiones de 45-50 minutos**, una por semana. Es una opción ideal para iniciar tu proceso con acompañamiento constante"
@@ -32,7 +32,7 @@
         "duracion": "10ss. de 45 - 50 minutos",
         "modalidad": "Presencial/Virtual",
         "precio": "$600.000 COP",
-        "imagen": "/src/assets/images/PaqueteTrimestral.svg",
+        "imagen": "PaqueteTrimestral.svg",
         "descripcion": [
             "La **experiencia más completa** para un trabajo terapéutico profundo y transformador que te llevará a descubrir tu mejor versión.",
             "El paquete trimestral, adaptado a tus necesidades, incluye **10 sesiones de 45-50 minutos** distribuidas a lo largo de **3 meses**, con un **10% de descuento**.",

@@ -5,276 +5,276 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 
 const Paquetes = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [paquetes, setPaquetes] = useState([]);
-  const [flippedCards, setFlippedCards] = useState({});
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [paquetes, setPaquetes] = useState([]);
+    const [flippedCards, setFlippedCards] = useState({});
 
-  useEffect(() => {
-    fetch('/data/paquetes.json')
-      .then((res) => res.json())
-      .then((data) => setPaquetes(data));
-  }, []);
+    useEffect(() => {
+        fetch('/data/paquetes.json')
+            .then((res) => res.json())
+            .then((data) => setPaquetes(data));
+    }, []);
 
-  const nextSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide((prev) => (prev + 1) % paquetes.length);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
+    const nextSlide = () => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setCurrentSlide((prev) => (prev + 1) % paquetes.length);
+        setTimeout(() => setIsAnimating(false), 300);
+    };
 
-  const prevSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide((prev) => (prev - 1 + paquetes.length) % paquetes.length);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
+    const prevSlide = () => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setCurrentSlide((prev) => (prev - 1 + paquetes.length) % paquetes.length);
+        setTimeout(() => setIsAnimating(false), 300);
+    };
 
-  const goToSlide = (index) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide(index);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
+    const goToSlide = (index) => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setCurrentSlide(index);
+        setTimeout(() => setIsAnimating(false), 300);
+    };
 
-  const toggleCard = (paqueteId) => {
-    setFlippedCards(prev => ({
-      ...prev,
-      [paqueteId]: !prev[paqueteId]
-    }));
-  };
+    const toggleCard = (paqueteId) => {
+        setFlippedCards(prev => ({
+            ...prev,
+            [paqueteId]: !prev[paqueteId],
+        }));
+    };
 
-  // Función para obtener el índice rotativo
-  const getRotatedIndex = (index) => {
-    return (index + currentSlide) % paquetes.length;
-  };
+    // Función para obtener el índice rotativo
+    const getRotatedIndex = (index) => {
+        return (index + currentSlide) % paquetes.length;
+    };
 
-  // Función para obtener las clases de animación según la posición
-  const getAnimationClasses = (position) => {
-    const baseClasses = "transition-all duration-300 ease-in-out";
+    // Función para obtener las clases de animación según la posición
+    const getAnimationClasses = (position) => {
+        const baseClasses = 'transition-all duration-300 ease-in-out';
     
-    if (isAnimating) {
-      // Durante la animación, agregar efectos de slide
-      if (position === 0) {
-        return `${baseClasses} transform scale-95 opacity-80`;
-      } else if (position === 1) {
-        return `${baseClasses} transform scale-105 opacity-100`;
-      } else if (position === 2) {
-        return `${baseClasses} transform scale-95 opacity-80`;
-      }
-    }
+        if (isAnimating) {
+            // Durante la animación, agregar efectos de slide
+            if (position === 0) {
+                return `${baseClasses} transform scale-95 opacity-80`;
+            } else if (position === 1) {
+                return `${baseClasses} transform scale-105 opacity-100`;
+            } else if (position === 2) {
+                return `${baseClasses} transform scale-95 opacity-80`;
+            }
+        }
     
-    // Estado normal
-    if (position === 1) {
-      return `${baseClasses} transform scale-105`;
-    }
+        // Estado normal
+        if (position === 1) {
+            return `${baseClasses} transform scale-105`;
+        }
     
-    return `${baseClasses} transform scale-100`;
-  };
+        return `${baseClasses} transform scale-100`;
+    };
 
-  return (
-    <section 
-      id="paquetes"
-      className="py-12 md:py-16 px-4 md:px-6 flex items-center justify-center pt-24 md:pt-32" 
-      style={{ backgroundColor: '#F9F4FE', width: '100vw', height: '100vh' }}
-    >
-      <div className="max-w-6xl md:max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#55408B' }}>
+    return (
+        <section 
+            id="paquetes"
+            className="py-12 md:py-16 px-4 md:px-6 flex items-center justify-center pt-24 md:pt-32" 
+            style={{ backgroundColor: '#F9F4FE', width: '100vw', height: '100vh' }}
+        >
+            <div className="max-w-6xl md:max-w-7xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-8 md:mb-12">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#55408B' }}>
             Mis Paquetes
-          </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl md:max-w-3xl mx-auto mb-2 px-4">
+                    </h2>
+                    <p className="text-base md:text-lg text-gray-600 max-w-2xl md:max-w-3xl mx-auto mb-2 px-4">
             Explora los planes disponibles y elige el que mejor se adapte a ti. ¡Hablemos en persona para concretarlo!
-          </p>
-          <p className="text-xs md:text-sm text-gray-500">
+                    </p>
+                    <p className="text-xs md:text-sm text-gray-500">
             Las sesiones virtuales pueden realizarse por videollamada o Google Meet.
-          </p>
-        </div>
+                    </p>
+                </div>
 
-        {/* Carrusel Container */}
-        <div className="relative">
-          {/* Flecha Izquierda */}
-          <button
-            onClick={prevSlide}
-            disabled={isAnimating}
-            className="absolute -left-8 md:-left-16 top-1/2 transform -translate-y-1/2 z-0 w-10 h-10 md:w-12 md:h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Paquete anterior"
-          >
-            <ArrowBackIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
-          </button>
+                {/* Carrusel Container */}
+                <div className="relative">
+                    {/* Flecha Izquierda */}
+                    <button
+                        onClick={prevSlide}
+                        disabled={isAnimating}
+                        className="absolute -left-8 md:-left-16 top-1/2 transform -translate-y-1/2 z-0 w-10 h-10 md:w-12 md:h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-label="Paquete anterior"
+                    >
+                        <ArrowBackIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
+                    </button>
 
-          {/* Flecha Derecha */}
-          <button
-            onClick={nextSlide}
-            disabled={isAnimating}
-            className="absolute -right-8 md:-right-16 top-1/2 transform -translate-y-1/2 z-0 w-10 h-10 md:w-12 md:h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Paquete siguiente"
-          >
-            <ArrowForwardIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
-          </button>
+                    {/* Flecha Derecha */}
+                    <button
+                        onClick={nextSlide}
+                        disabled={isAnimating}
+                        className="absolute -right-8 md:-right-16 top-1/2 transform -translate-y-1/2 z-0 w-10 h-10 md:w-12 md:h-12 bg-purple-200 hover:bg-purple-300 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-label="Paquete siguiente"
+                    >
+                        <ArrowForwardIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
+                    </button>
 
-          {/* Contenedor de Tarjetas */}
-          <div className="flex justify-center">
-            <div className="flex gap-4 md:gap-8 max-w-5xl md:max-w-6xl">
-              {[0, 1, 2].map((position) => {
-                const paqueteIndex = getRotatedIndex(position);
-                const paquete = paquetes[paqueteIndex];
+                    {/* Contenedor de Tarjetas */}
+                    <div className="flex justify-center">
+                        <div className="flex gap-4 md:gap-8 max-w-5xl md:max-w-6xl">
+                            {[0, 1, 2].map((position) => {
+                                const paqueteIndex = getRotatedIndex(position);
+                                const paquete = paquetes[paqueteIndex];
                 
-                if (!paquete) return null;
+                                if (!paquete) return null;
                 
-                const isFlipped = flippedCards[paquete.id];
+                                const isFlipped = flippedCards[paquete.id];
                 
-                return (
-                  <div key={`${position}-${paqueteIndex}`} className="w-64 md:w-80 flex-shrink-0">
-                    <div className={`relative w-full h-80 md:h-96 ${getAnimationClasses(position)}`}>
-                      {/* Flip Card Container */}
-                      <div 
-                        className="relative w-full h-full transition-transform duration-700"
-                        style={{
-                          transformStyle: 'preserve-3d',
-                          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
-                        }}
-                      >
-                        {/* Frente de la tarjeta */}
-                        <div 
-                          className="absolute w-full h-full bg-white rounded-xl shadow-lg p-4 md:p-6"
-                          style={{ backfaceVisibility: 'hidden' }}
-                        >
-                          <div className="flex items-center justify-center mb-4 md:mb-6">
-                            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-                              <img
-                                src={paquete.imagen}
-                                alt={paquete.titulo}
-                                className="w-full h-full object-contain"
-                              />
-                            </div>
-                          </div>
+                                return (
+                                    <div key={`${position}-${paqueteIndex}`} className="w-64 md:w-80 flex-shrink-0">
+                                        <div className={`relative w-full h-80 md:h-96 ${getAnimationClasses(position)}`}>
+                                            {/* Flip Card Container */}
+                                            <div 
+                                                className="relative w-full h-full transition-transform duration-700"
+                                                style={{
+                                                    transformStyle: 'preserve-3d',
+                                                    transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                                                }}
+                                            >
+                                                {/* Frente de la tarjeta */}
+                                                <div 
+                                                    className="absolute w-full h-full bg-white rounded-xl shadow-lg p-4 md:p-6"
+                                                    style={{ backfaceVisibility: 'hidden' }}
+                                                >
+                                                    <div className="flex items-center justify-center mb-4 md:mb-6">
+                                                        <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+                                                            <img
+                                                                src={new URL(`../assets/images/${paquete.imagen}`, import.meta.url).href}
+                                                                alt={paquete.titulo}
+                                                                className="w-full h-full object-contain"
+                                                            />
+                                                        </div>
+                                                    </div>
 
-                          <div className="text-center mb-4 md:mb-6">
-                            <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: '#55408B' }}>
-                              {paquete.titulo}
-                            </h3>
-                            <p className="text-gray-600 text-xs md:text-sm mb-3 md:mb-4">
-                              {paquete.subtitulo}
-                            </p>
-                          </div>
+                                                    <div className="text-center mb-4 md:mb-6">
+                                                        <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: '#55408B' }}>
+                                                            {paquete.titulo}
+                                                        </h3>
+                                                        <p className="text-gray-600 text-xs md:text-sm mb-3 md:mb-4">
+                                                            {paquete.subtitulo}
+                                                        </p>
+                                                    </div>
 
-                          <div className="space-y-2 mb-4 md:mb-6">
-                            <div className="flex justify-between items-center text-xs md:text-sm">
-                              <span className="text-gray-600">Duración:</span>
-                              <span className="font-medium text-gray-800">{paquete.duracion}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-xs md:text-sm">
-                              <span className="text-gray-600">Modalidad:</span>
-                              <span className="font-medium text-gray-800">{paquete.modalidad}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-xs md:text-sm">
-                              <span className="text-gray-600">Precio:</span>
-                              <span className="font-bold" style={{ color: '#55408B' }}>{paquete.precio}</span>
-                            </div>
-                          </div>
+                                                    <div className="space-y-2 mb-4 md:mb-6">
+                                                        <div className="flex justify-between items-center text-xs md:text-sm">
+                                                            <span className="text-gray-600">Duración:</span>
+                                                            <span className="font-medium text-gray-800">{paquete.duracion}</span>
+                                                        </div>
+                                                        <div className="flex justify-between items-center text-xs md:text-sm">
+                                                            <span className="text-gray-600">Modalidad:</span>
+                                                            <span className="font-medium text-gray-800">{paquete.modalidad}</span>
+                                                        </div>
+                                                        <div className="flex justify-between items-center text-xs md:text-sm">
+                                                            <span className="text-gray-600">Precio:</span>
+                                                            <span className="font-bold" style={{ color: '#55408B' }}>{paquete.precio}</span>
+                                                        </div>
+                                                    </div>
 
-                          <div className="text-center">
-                            <button 
-                              className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-2 md:!py-3 px-3 md:px-4 text-xs md:text-sm cursor-pointer"
-                              style={{ backgroundColor: '#A569E5', color: '#fff' }}
-                              onClick={() => toggleCard(paquete.id)}
-                              aria-label={`Leer más sobre ${paquete.titulo}`}
-                            >
-                              <span>Leer más</span>
-                              <ArrowForwardIcon className="w-3 h-3" />
-                            </button>
-                          </div>
+                                                    <div className="text-center">
+                                                        <button 
+                                                            className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-2 md:!py-3 px-3 md:px-4 text-xs md:text-sm cursor-pointer"
+                                                            style={{ backgroundColor: '#A569E5', color: '#fff' }}
+                                                            onClick={() => toggleCard(paquete.id)}
+                                                            aria-label={`Leer más sobre ${paquete.titulo}`}
+                                                        >
+                                                            <span>Leer más</span>
+                                                            <ArrowForwardIcon className="w-3 h-3" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                {/* Reverso de la tarjeta */}
+                                                <div 
+                                                    className="absolute w-full h-full bg-white rounded-xl shadow-lg p-4 md:p-6"
+                                                    style={{ 
+                                                        backfaceVisibility: 'hidden',
+                                                        transform: 'rotateY(180deg)',
+                                                    }}
+                                                >
+                                                    <div className="h-full flex flex-col">
+                                                        {/* Header del reverso */}
+                                                        <div className="text-center mb-4 md:mb-6">
+                                                            <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: '#55408B' }}>
+                                                                {paquete.titulo}
+                                                            </h3>
+                                                        </div>
+
+                                                        {/* Contenido del reverso */}
+                                                        <div className="flex-1 space-y-3 md:space-y-4 overflow-y-auto pr-2" style={{
+                                                            scrollbarWidth: 'thin',
+                                                            scrollbarColor: '#A569E5 #f3eafd',
+                                                        }}>
+                                                            {paquete.descripcion.map((parrafo) => (
+                                                                <p 
+                                                                    // Usar una combinación única del ID del paquete y el contenido del párrafo
+                                                                    key={`${paquete.id}-${parrafo.substring(0, 20)}`} 
+                                                                    className="text-gray-700 text-xs md:text-sm leading-relaxed text-left"
+                                                                >
+                                                                    {parrafo.split('**').map((part, i, array) => 
+                                                                        i % 2 === 1 
+                                                                            ? <strong 
+                                                                                // Usar una combinación única del ID del paquete, contenido y posición
+                                                                                key={`${paquete.id}-${part}-${i}`} 
+                                                                                style={{ color: '#55408B' }}
+                                                                            >
+                                                                                {part}
+                                                                            </strong> 
+                                                                            : part,
+                                                                    )}
+                                                                </p>
+                                                            ))}
+                                                        </div>
+
+                                                        {/* Botón Volver */}
+                                                        <div className="text-center mt-3 md:mt-4">
+                                                            <button
+                                                                onClick={() => toggleCard(paquete.id)}
+                                                                className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-2 md:!py-3 px-3 md:px-4 text-xs md:text-sm cursor-pointer"
+                                                                style={{ backgroundColor: '#A569E5', color: '#fff' }}
+                                                                aria-label="Volver al frente de la tarjeta"
+                                                            >
+                                                                <span>Volver</span>
+                                                                <ArrowBackIcon className="w-3 h-3 md:w-4 md:h-4" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
-
-                        {/* Reverso de la tarjeta */}
-                        <div 
-                          className="absolute w-full h-full bg-white rounded-xl shadow-lg p-4 md:p-6"
-                          style={{ 
-                            backfaceVisibility: 'hidden',
-                            transform: 'rotateY(180deg)'
-                          }}
-                        >
-                          <div className="h-full flex flex-col">
-                            {/* Header del reverso */}
-                            <div className="text-center mb-4 md:mb-6">
-                              <h3 className="text-lg md:text-xl font-bold mb-2" style={{ color: '#55408B' }}>
-                                {paquete.titulo}
-                              </h3>
-                            </div>
-
-                            {/* Contenido del reverso */}
-                            <div className="flex-1 space-y-3 md:space-y-4 overflow-y-auto pr-2" style={{
-                              scrollbarWidth: 'thin',
-                              scrollbarColor: '#A569E5 #f3eafd'
-                            }}>
-                              {paquete.descripcion.map((parrafo) => (
-                                <p 
-                                  // Usar una combinación única del ID del paquete y el contenido del párrafo
-                                  key={`${paquete.id}-${parrafo.substring(0, 20)}`} 
-                                  className="text-gray-700 text-xs md:text-sm leading-relaxed text-left"
-                                >
-                                  {parrafo.split('**').map((part, i, array) => 
-                                    i % 2 === 1 
-                                      ? <strong 
-                                          // Usar una combinación única del ID del paquete, contenido y posición
-                                          key={`${paquete.id}-${part}-${i}`} 
-                                          style={{ color: '#55408B' }}
-                                        >
-                                        {part}
-                                      </strong> 
-                                    : part
-                                  )}
-                                </p>
-                              ))}
-                            </div>
-
-                            {/* Botón Volver */}
-                            <div className="text-center mt-3 md:mt-4">
-                              <button
-                                onClick={() => toggleCard(paquete.id)}
-                                className="w-full flex items-center justify-center gap-2 hover:gap-3 transition-all duration-200 font-medium !rounded-2xl shadow-md !py-2 md:!py-3 px-3 md:px-4 text-xs md:text-sm cursor-pointer"
-                                style={{ backgroundColor: '#A569E5', color: '#fff' }}
-                                aria-label="Volver al frente de la tarjeta"
-                              >
-                                <span>Volver</span>
-                                <ArrowBackIcon className="w-3 h-3 md:w-4 md:h-4" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
-                );
-              })}
+
+                    {/* Puntos de Navegación */}
+                    <div className="flex justify-center mt-6 md:mt-8 space-x-2">
+                        {paquetes.map((paquete, index) => (
+                            <button
+                                key={`nav-${paquete.id}-${index}`}
+                                onClick={() => goToSlide(index)}
+                                disabled={isAnimating}
+                                className="transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label={`Ir al paquete ${paquete.titulo}`}
+                            >
+                                {index === currentSlide ? (
+                                    <RadioButtonCheckedIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
+                                ) : (
+                                    <RadioButtonUncheckedIcon className="text-purple-400 w-5 h-5 md:w-6 md:h-6 hover:text-purple-600" />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
             </div>
-          </div>
 
-          {/* Puntos de Navegación */}
-          <div className="flex justify-center mt-6 md:mt-8 space-x-2">
-            {paquetes.map((paquete, index) => (
-              <button
-                key={`nav-${paquete.id}-${index}`}
-                onClick={() => goToSlide(index)}
-                disabled={isAnimating}
-                className="transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label={`Ir al paquete ${paquete.titulo}`}
-              >
-                {index === currentSlide ? (
-                  <RadioButtonCheckedIcon className="text-purple-700 w-5 h-5 md:w-6 md:h-6" />
-                ) : (
-                  <RadioButtonUncheckedIcon className="text-purple-400 w-5 h-5 md:w-6 md:h-6 hover:text-purple-600" />
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Estilos CSS para el flip card */}
-      <style>{`
+            {/* Estilos CSS para el flip card */}
+            <style>{`
         .flip-card {
           perspective: 1000px;
         }
@@ -313,8 +313,8 @@ const Paquetes = () => {
           background: #8d4fc7;
         }
       `}</style>
-    </section>
-  );
+        </section>
+    );
 };
 
 export default Paquetes;

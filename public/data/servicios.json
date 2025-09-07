@@ -3,24 +3,24 @@
     "id": 1,
     "titulo": "Psicoterapia Individual",
     "descripcion": "Te ofrezco un espacio seguro para hablar sin juicios, trabajar tus emociones y construir una vida con más equilibrio y bienestar.",
-    "imagen": "/src/assets/images/ServicioIndividual.svg"
+    "imagen": "ServicioIndividual.svg"
   },
   {
     "id": 2,
     "titulo": "Capacitación Empresarial",
     "descripcion": "Impulsa a tu equipo con talleres dinámicos que fortalecen la comunicación, el liderazgo, el bienestar emocional y la productividad.",
-    "imagen": "/src/assets/images/ServicioEmpresarial.svg"
+    "imagen": "ServicioEmpresarial.svg"
   },
   {
     "id": 3,
     "titulo": "Escuela para Padres",
     "descripcion": "Acompaño tu proceso de crianza con herramientas claras para fortalecer vínculos y enfrentar desafíos familiares con más confianza.",
-    "imagen": "/src/assets/images/TimelinePadres.svg"
+    "imagen": "TimelinePadres.svg"
   },
   {
     "id": 4,
     "titulo": "Orientación Vocacional",
     "descripcion": "Te ayudo a descubrir tus intereses, talentos y metas para tomar decisiones claras y construir un camino profesional con propósito.",
-    "imagen": "/src/assets/images/ServicioVocacional.svg"
+    "imagen": "ServicioVocacional.svg"
   }
 ]
