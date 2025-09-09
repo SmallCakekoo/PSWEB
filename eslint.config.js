@@ -3,10 +3,17 @@ import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import jsxA11y from "eslint-plugin-jsx-a11y";
-import react from "eslint-plugin-react";
+import { FlatCompat } from "@eslint/eslintrc";
+import react from 'eslint-plugin-react';
+import path from 'path';
+
+const compat = new FlatCompat({
+    baseDirectory: path.resolve(),
+});
 
 export default [
     js.configs.recommended,
+    ...compat.extends("plugin:react/recommended"),
     {
         files: ["**/*.{js,jsx}"],
         languageOptions: {
@@ -27,11 +34,11 @@ export default [
             "react": react,
             "react-hooks": reactHooks,
             "react-refresh": reactRefresh,
-            "jsx-a11y": jsxA11y,
+            "jsx-a11y": jsxA11y
         },
         rules: {
             // Reglas generales de JavaScript
-            "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+            "no-unused-vars": ["error"],
             "no-console": "warn",
             "no-debugger": "error",
             "prefer-const": "error",
@@ -58,27 +65,8 @@ export default [
             "jsx-a11y/anchor-has-content": "warn",
             "jsx-a11y/anchor-is-valid": "warn",
 
-            // Reglas de rendimiento
-            "react/jsx-no-bind": "warn",
-            "react/jsx-key": "error",
-            "react/jsx-no-duplicate-props": "error",
-            "react/jsx-no-undef": "error",
-            "react/no-array-index-key": "warn",
-            "react/no-danger": "warn",
-            "react/no-deprecated": "warn",
-            "react/no-direct-mutation-state": "error",
-            "react/no-find-dom-node": "warn",
-            "react/no-is-mounted": "warn",
-            "react/no-render-return-value": "warn",
-            "react/no-string-refs": "warn",
-            "react/no-unescaped-entities": "warn",
-            "react/no-unknown-property": "warn",
-            "react/no-unsafe": "warn",
-            "react/self-closing-comp": "error",
-            "react/sort-comp": "warn",
-            "react/sort-prop-types": "warn",
-            "react/style-prop-object": "warn",
-            "react/void-dom-elements-no-children": "error",
+            "react/react-in-jsx-scope": "off",
+
         },
         settings: {
             react: {
